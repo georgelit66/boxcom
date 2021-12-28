@@ -1,9 +1,11 @@
 
 import 'package:boxcom/pages/authentication/register.dart';
+import 'package:boxcom/pages/screens.dart';
 import 'package:boxcom/widgets/form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -29,23 +31,27 @@ class _LoginFormState extends State<LoginForm> {
       body: Center(
         child: Column(
           children: [
+            const SizedBox(height: 15,),
+            SvgPicture.asset(
+              "assets/svg/login.svg",
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.45,
+            ),
 
-            const SizedBox(height: 155,),
+            const SizedBox(height: 15,),
 
-           myFormField(
-             context,
-             "Email",
-               const Icon(Icons.email, color: Colors.black54,),
-             emailController
-           ),
+
 
             const SizedBox(height: 15,),
 
             myFormField(
                 context,
                 "Password",
-                const Icon(Icons.password, color: Colors.black54,),
-                passwordController
+                const Icon(Icons.lock, color: Colors.black54,),
+                passwordController,
+              1
             ),
 
 
@@ -57,6 +63,8 @@ class _LoginFormState extends State<LoginForm> {
                 try{
                   var email = emailController.value.text;
                   var password = passwordController.value.text;
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const MainHomePage()));
 
 
                 } catch(e){
@@ -71,8 +79,8 @@ class _LoginFormState extends State<LoginForm> {
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [
-                      Colors.green,
-                      Colors.greenAccent
+                      Colors.cyan,
+                      Colors.cyanAccent
                     ]
                   ),
                   borderRadius: BorderRadius.circular(30)
@@ -111,14 +119,13 @@ class _LoginFormState extends State<LoginForm> {
 
                 InkWell(
                   onTap: (){
-
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const Register()));
                   },
                   child: const Text(
                     "Sign up",
                     style: TextStyle(
                         fontSize: 17,
-                        color: Colors.green
+                        color: Colors.cyan
                     ),
                   ),
                 )
