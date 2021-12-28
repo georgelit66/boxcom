@@ -42,181 +42,269 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
   TextEditingController telephoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+  int _activeStepIndex = 0;
 
-            SizedBox(height: height * .06,),
-            InkWell(
+
+  List<Step> stepList() => [
+    Step(
+      state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
+      isActive: _activeStepIndex >= 0,
+      title: const Text('Basic Info'),
+      content: Column(
+        children: [
+
+
+          InkWell(
               onTap: getImage,
               child:  CircleAvatar(
                 backgroundImage: const AssetImage(
-                  "assets/products/house4.png"
+                    "assets/products/house4.png"
                 ),
                 foregroundImage: _image != null ? FileImage(_image!) : FileImage(File.fromUri(Uri.parse("ff"))),
                 radius: 70,
               )
-            ),
+          ),
 
-            myFormField(
-                context,
-                "creator",
-                const Icon(Icons.email, color: Colors.black54,),
-                creatorController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "Tag",
-                const Icon(Icons.email, color: Colors.black54,),
-                tagController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "Enterprise Name",
-                const Icon(Icons.email, color: Colors.black54,),
-                enterpriseNameController,
-                1
-            ),
-            myFormField(
-                context,
-                "Enterprise Domain",
-                const Icon(Icons.email, color: Colors.black54,),
-                domainController,
-               1
-            ),
-
-
-
-            myFormField(
-                context,
-                "Description",
-                const Icon(Icons.email, color: Colors.black54,),
-                descriptionController,
-                4
-            ),
-            myFormField(
-                context,
-                "Country",
-                const Icon(Icons.email, color: Colors.black54,),
-                countryController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "Town",
-                const Icon(Icons.email, color: Colors.black54,),
-                townController,
-                1
-            ),
-
-
-            myFormField(
-                context,
-                "Address",
-                const Icon(Icons.email, color: Colors.black54,),
-                addressController,
-                2
-            ),
-
-
-            myFormField(
-                context,
-                "Website",
-                const Icon(Icons.email, color: Colors.black54,),
-                websiteController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "open Hour",
-                const Icon(Icons.email, color: Colors.black54,),
-                openHourController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "closing Hour",
-                const Icon(Icons.email, color: Colors.black54,),
-                closingHourController,
-                1
-            ),
-
-            myFormField(
-                context,
-                "Telephone",
-                const Icon(Icons.email, color: Colors.black54,),
-                telephoneController,
-               1
-            ),
-
-            myFormField(
-                context,
-                "Email",
-                const Icon(Icons.email, color: Colors.black54,),
-                emailController,
+          myFormField(
+              context,
+              "creator",
+              const Icon(Icons.email, color: Colors.black54,),
+              creatorController,
               1
-            ),
+          ),
+
+          myFormField(
+              context,
+              "Tag",
+              const Icon(Icons.email, color: Colors.black54,),
+              tagController,
+              1
+          ),
+
+          myFormField(
+              context,
+              "Enterprise Name",
+              const Icon(Icons.email, color: Colors.black54,),
+              enterpriseNameController,
+              1
+          ),
+          myFormField(
+              context,
+              "Enterprise Domain",
+              const Icon(Icons.email, color: Colors.black54,),
+              domainController,
+              1
+          ),
 
 
 
+          myFormField(
+              context,
+              "Description",
+              const Icon(Icons.email, color: Colors.black54,),
+              descriptionController,
+              4
+          ),
+        ],
+      ),
+    ),
+    Step(
+        state:
+        _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
+        isActive: _activeStepIndex >= 1,
+        title: const Text('Address'),
+        content: Container(
+          child: Column(
+            children: [
+              myFormField(
+                  context,
+                  "Country",
+                  const Icon(Icons.email, color: Colors.black54,),
+                  countryController,
+                  1
+              ),
 
-            const SizedBox(height: 15,),
+              myFormField(
+                  context,
+                  "Town",
+                  const Icon(Icons.email, color: Colors.black54,),
+                  townController,
+                  1
+              ),
 
-            MaterialButton(
-              onPressed: () async{
-                var id = creatorController.value.text;
-                var name = tagController.value.text;
-                var website =enterpriseNameController.value.text;
-                var location = townController.value.text;
-                var description= descriptionController.value.text;
-                var category = addressController.value.text;
-                var country = countryController.value.text;
-                var telephone = domainController.value.text;
 
-                try{
+              myFormField(
+                  context,
+                  "Address",
+                  const Icon(Icons.email, color: Colors.black54,),
+                  addressController,
+                  1
+              ),
 
-                  Navigator.pop(context);
+              myFormField(
+                  context,
+                  "Telephone",
+                  const Icon(Icons.email, color: Colors.black54,),
+                  telephoneController,
+                  1
+              ),
 
-                } catch(e){
-                  print("There was an error at $e");
-                }
 
-              },
-
-              child: Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(16.0)
+            ],
+          ),
+        )),
+    Step(
+        state: StepState.complete,
+        isActive: _activeStepIndex >= 2,
+        title: const Text('Confirm'),
+        content: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                myFormField(
+                    context,
+                    "Website",
+                    const Icon(Icons.email, color: Colors.black54,),
+                    websiteController,
+                    1
                 ),
-                child:  const Center(
-                  child: Text(
-                    "Create enterprise",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16
-                    ),
-                  ),
-                )
-              )
-            ),
 
-            const SizedBox(height: 20,)
+                myFormField(
+                    context,
+                    "open Hour",
+                    const Icon(Icons.email, color: Colors.black54,),
+                    openHourController,
+                    1
+                ),
+
+                myFormField(
+                    context,
+                    "closing Hour",
+                    const Icon(Icons.email, color: Colors.black54,),
+                    closingHourController,
+                    1
+                ),
 
 
+                myFormField(
+                    context,
+                    "Email",
+                    const Icon(Icons.email, color: Colors.black54,),
+                    emailController,
+                    1
+                ),
+              ],
+            )))
+  ];
 
-          ],
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.only(top: height * .6),
+        child: Stepper(
+          type: StepperType.vertical,
+          currentStep: _activeStepIndex,
+          steps: stepList(),
+          onStepContinue: () {
+            if (_activeStepIndex < (stepList().length - 1)) {
+              setState(() {
+                _activeStepIndex += 1;
+              });
+            } else {
+              Navigator.pop(context);
+            }
+          },
+          onStepCancel: () {
+            if (_activeStepIndex == 0) {
+              return;
+            }
+
+            setState(() {
+              _activeStepIndex -= 1;
+            });
+          },
+          onStepTapped: (int index) {
+            setState(() {
+              _activeStepIndex = index;
+            });
+          },
+          controlsBuilder: (context, {onStepContinue, onStepCancel}) {
+            final isLastStep = _activeStepIndex == stepList().length - 1;
+            return Row(
+              children: [
+                Expanded(
+                    child: InkWell(
+                      onTap: () async{
+                        try{
+                          onStepContinue!();
+
+                        } catch(e){
+                        }
+
+                      },
+                      child: Container(
+                        height: 45,
+                        width: MediaQuery.of(context).size.width  * .65,
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                                colors: [
+                                  Colors.cyan,
+                                  Colors.cyanAccent
+                                ]
+                            ),
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+
+                        child: Center(
+                          child: (isLastStep)
+                              ? const Text('Create Enterprise')
+                              : const Text('Next'),
+                        ),
+                      ),
+                    )
+                ),
+
+
+                const SizedBox(
+                  width: 10,
+                ),
+                if (_activeStepIndex > 0)
+                  Expanded(
+                      child: InkWell(
+                        onTap: () async{
+                          try{
+                            onStepContinue!();
+
+                          } catch(e){
+                          }
+
+                        },
+                        child: Container(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width  * .65,
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                  colors: [
+                                    Colors.cyan,
+                                    Colors.cyanAccent
+                                  ]
+                              ),
+                              borderRadius: BorderRadius.circular(30)
+                          ),
+
+                          child: const Center(
+                            child :Text('Back'),
+                          ),
+                        ),
+                      )
+                  )
+              ],
+            );
+          },
         ),
       ),
     );
