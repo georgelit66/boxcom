@@ -38,7 +38,7 @@ class _HomePostZoomState extends State<HomePostZoom> {
           
 
             actions: <Widget>[
-              popUpMenuImage(Colors.white, widget.post)
+              PopUpMenuImage(color: Colors.white, post: widget.post)
             ],
           ),
 

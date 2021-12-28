@@ -1,13 +1,9 @@
-import 'package:boxcom/data/posts.dart';
 import 'package:boxcom/models/enterprise_model.dart';
 import 'package:boxcom/pages/home_page/tabs/components/web_view.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_view_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snack.dart';
 
 class EnterpriseDetail extends StatefulWidget {
   const EnterpriseDetail({Key? key, required this.enterprise})
@@ -36,22 +32,22 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
         body: CustomScrollView(controller: _trackingScrollController, slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Colors.white,
+         
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.more_vert, color: Colors.black),
+                icon: const Icon(Icons.more_vert),
                 onPressed: () {},
               ),
             ],
             title: Text(
               widget.enterprise.name,
-              style: const TextStyle(color: Colors.black54),
+              style: const TextStyle(),
             ),
             centerTitle: true,
           ),
@@ -76,7 +72,6 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                         Text(
                           widget.enterprise.name,
                           style: const TextStyle(
-                              color: Colors.black54,
                               fontSize: 20,
                               fontWeight: FontWeight.w700),
                         ),
@@ -86,7 +81,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                         Text(
                           widget.enterprise.enterpriseSector,
                           style: const TextStyle(
-                              color: Colors.black38, fontSize: 14),
+                               fontSize: 14),
                         ),
                       ],
                     )
@@ -108,7 +103,6 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             children: [
                               const Icon(
                                 Icons.location_on,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(
@@ -117,7 +111,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                               Text(
                                 widget.enterprise.ville,
                                 style: const TextStyle(
-                                    color: Colors.black54, fontSize: 16),
+                                    fontSize: 16),
                               ),
                             ],
                           ),
@@ -128,7 +122,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             children: [
                               const Icon(
                                 Icons.phone,
-                                color: Colors.black45,
+
                                 size: 20,
                               ),
                               const SizedBox(
@@ -137,7 +131,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                               Text(
                                 widget.enterprise.telephone,
                                 style: const TextStyle(
-                                    color: Colors.black54, fontSize: 16),
+                                    fontSize: 16),
                               ),
                             ],
                           ),
@@ -148,7 +142,6 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             children: [
                               const Icon(
                                 Icons.calendar_today_outlined,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(
@@ -156,8 +149,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                               ),
                               Text(
                                 "${widget.enterprise.openHour} - ${widget.enterprise.closingHour} ",
-                                style: const TextStyle(
-                                    color: Colors.black54, fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -168,7 +160,6 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             children: [
                               const Icon(
                                 Icons.language_outlined,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(
@@ -179,8 +170,8 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => WebViewPage(
-                                              enterprise: widget.enterprise)));
+                                          builder: (context) => WebViewPage(website: widget.enterprise.website,
+                                            )));
                                 },
                                 child: Text(
                                   widget.enterprise.website,
@@ -200,14 +191,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                 _isSubscribed = !_isSubscribed;
                               });
 
-                              Get.snackbar(
-                                  "Follow Action",
-                                  _isSubscribed
-                                      ? "you followed ${widget.enterprise.name}"
-                                      : "you are unfollowing ${widget.enterprise.name}",
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  backgroundColor: Colors.black54,
-                                  colorText: Colors.white);
+
                             },
                             child: _isSubscribed
                                 ? Container(
@@ -256,7 +240,6 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                 child: Text(
                   widget.enterprise.description,
                   style: const TextStyle(
-                      color: Colors.black54,
                       fontSize: 16,
                       fontWeight: FontWeight.w600),
                   maxLines: 3,
@@ -284,7 +267,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87),
+                                ),
                             ),
                             SizedBox(
                               height: 3.0,
@@ -292,7 +275,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             Text(
                               "followers",
                               style: TextStyle(
-                                  color: Colors.black54, fontSize: 16),
+                                 fontSize: 16),
                             )
                           ],
                         ),
@@ -311,7 +294,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87),
+                                ),
                             ),
                             SizedBox(
                               height: 3.0,
@@ -319,7 +302,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                             Text(
                               "partners",
                               style: TextStyle(
-                                  color: Colors.black54, fontSize: 16),
+                                 fontSize: 16),
                             )
                           ],
                         ),
@@ -332,14 +315,14 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                           style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black87),
+                              ),
                         ),
                         const SizedBox(
                           height: 3.0,
                         ),
                         const Text(
                           "posts",
-                          style: TextStyle(color: Colors.black54, fontSize: 16),
+                          style: TextStyle( fontSize: 16),
                         )
                       ],
                     ),

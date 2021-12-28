@@ -1,0 +1,78 @@
+{
+    "language": "English",
+    "@language":{
+      "description": "The current Language"
+    },
+
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "A programmer greeting"
+    },
+
+    "appName": "Boxcom",
+    "@appName": {
+      "description": "Application Name"
+    },
+
+
+
+    "homeTab" : "Home",
+    "enterpriseTab": "Enterprise",
+    "boutiqueTab": "Boutique",
+
+
+    "clothesCategory": "Clothes",
+    "automobileCategory": "Automobile",
+    "gadgetsCategory": "Gadgets",
+    "phoneCategory" : "Phones",
+    "estateCategory": "Estates",
+
+
+    "account" : "My Account",
+    "settings": "Settings",
+    "storedFiles": "My Stored Files",
+    "helpCenter": "Help Center",
+    "favourites": "Favourites",
+    "logout": "Logout",
+
+  "subscriptions": "Subscriptions",
+  "myEnterprises": "My Enterprises",
+  "myBoutiques": "My Boutiques",
+
+  "subscribe": "Follow",
+  "unsubscribe": "Unfollow",
+  "search": "Search",
+
+  "searchResults": "Search Results",
+
+  "seeMore": "See More",
+
+  "darkTheme": "Dark Theme",
+
+  "signal" : "Signal",
+  "downloadPhoto": "Download the photo",
+  "maskPost": "Mask this post",
+  "saveProduct": "Save this product",
+  "savePost": "Save this post",
+
+
+  "retail": "Retail",
+  "beauty": "Beauty",
+  "technology": "Technology",
+  "construction": "Construction",
+  "transport": "Transport",
+
+
+
+
+
+    "hello": "Hello {username}",
+    "@hello": {
+      "description": "A welcome message",
+      "placeholders": {
+         "username": {
+           "type": "String"
+         }
+      }
+    }
+}

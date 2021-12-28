@@ -1,4 +1,4 @@
-import 'package:boxcom/data/posts.dart';
+import 'package:boxcom/models/post_model.dart';
 import 'package:boxcom/pages/home_page/tabs/components/post_menu.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_video.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,9 +9,10 @@ import 'package:video_player/video_player.dart';
 class VideoFullScreen extends StatefulWidget {
 
   final VideoPlayerController controller;
+  final Post post;
 
 
-  const VideoFullScreen({Key? key, required this.controller}) : super(key: key);
+  const VideoFullScreen({Key? key, required this.controller, required this.post}) : super(key: key);
 
   @override
   _VideoFullScreenState createState() => _VideoFullScreenState();
@@ -245,7 +246,7 @@ class _VideoFullScreenState extends State<VideoFullScreen> {
 
 
         actions: <Widget>[
-          popUpMenuVideo(Colors.white, postList[3])
+          PopUpMenuVideo(  color: Colors.white, post: widget.post,)
         ],
       ),
       body: Padding(

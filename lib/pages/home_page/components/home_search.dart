@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeSearch extends StatefulWidget {
   const HomeSearch({Key? key}) : super(key: key);
@@ -23,10 +24,10 @@ class _HomeSearchState extends State<HomeSearch> {
           ),
         ),
         backgroundColor: Colors.white,
-        title: const TextField(
+        title: TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(
-            hintText: 'Search...',
+            hintText: AppLocalizations.of(context)!.search,
           ),
 
         ),
@@ -40,9 +41,9 @@ class _HomeSearchState extends State<HomeSearch> {
           ),
         ],
       ),
-      body: const Center(
+      body:  Center(
         child: Text(
-          "Search results."
+            AppLocalizations.of(context)!.searchResults
         ),
       )
     );

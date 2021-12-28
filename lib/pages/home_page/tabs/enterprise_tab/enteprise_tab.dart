@@ -1,14 +1,12 @@
-import 'package:boxcom/data/enterprises.dart';
-import 'package:boxcom/models/user_model.dart';
 import 'package:boxcom/pages/home_page/tabs/enterprise_tab/components/enterprise_search.dart';
-import 'package:boxcom/repositories/enterprise_repository.dart';
 import 'package:boxcom/pages/home_page/tabs/components/list_enterprises_boutiques_item.dart';
-import 'package:boxcom/widgets/form_field.dart';
+import 'package:boxcom/pages/home_page/tabs/enterprise_tab/controller/enterprise_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:provider/src/provider.dart';
+import 'components/enterprise_form.dart';
 import 'components/sort_enterprise.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class EnterpriseTab extends StatefulWidget {
@@ -21,25 +19,15 @@ class EnterpriseTab extends StatefulWidget {
 }
 
 class _EnterpriseTabState extends State<EnterpriseTab> {
-  
-  
-  TextEditingController idController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController websiteController = TextEditingController();
-  TextEditingController telephoneController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
-  TextEditingController enterpriseCategoryController = TextEditingController();
-
-  
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
 
 
-    final enterpriseData = Get.put(EnterpriseRepository());
+
+    final enterpriseProvider = context.watch<EnterpriseProvider>().getEnterprises();
+
 
     return Scaffold(
       body: Column(
@@ -57,19 +45,13 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 22,
-                          color: Colors.black54
+
                       ),
                     ),
 
                     Row(
                       children: [
-                        IconButton(
-                            onPressed: (){},
-                            icon: const Icon(
-                              Icons.settings,
-                              color: Colors.black54,
-                            )
-                        ),
+
 
                         const SizedBox(width: 5.0,),
 
@@ -79,7 +61,6 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                             },
                             icon:const Icon(
                               Icons.search,
-                              color: Colors.black54,
                             )
                         ),
                         const SizedBox(width: 5.0,),
@@ -129,10 +110,10 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
 
-                              child: const Center(
+                              child: Center(
                                 child:  Text(
-                                  "Abonnements",
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.subscriptions,
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600
@@ -161,10 +142,10 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
 
-                              child: const Center(
+                              child:  Center(
                                 child:  Text(
-                                  "Mes Entreprises",
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.myEnterprises,
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600
@@ -192,17 +173,17 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
             child: _selectedIndex == 0?
             ListView.builder(
                 padding: const EdgeInsets.only(top: 0),
-                itemCount:enterprises.length,
+                itemCount:enterpriseProvider.length,
                 itemBuilder: (BuildContext context, int index){
-                  var enterprise = enterprises[index];
+                  var enterprise = enterpriseProvider[index];
                   return EnterpriseTile(enterprise: enterprise);
                 }
             )
            : ListView.builder(
                 padding: const EdgeInsets.only(top: 0),
-                itemCount:enterprises.length,
+                itemCount:enterpriseProvider.length,
                 itemBuilder: (BuildContext context, int index){
-                  var enterprise = enterprises[index];
+                  var enterprise =enterpriseProvider[index];
                   return myEnterpriseTile(enterprise, context);
                 }
             )
@@ -213,107 +194,7 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
 
         floatingActionButton: _selectedIndex == 1 ?   FloatingActionButton(
           onPressed: (){
-
-            showDialog(
-                context: context,
-                builder: (BuildContext context){
-                  return Card(
-                    child: Column(
-                      children: [
-
-                        myFormField(
-                            context,
-                            "id",
-                            const Icon(Icons.email, color: Colors.black54,),
-                            idController
-                        ),
-
-                        myFormField(
-                        context,
-                        "name",
-                        const Icon(Icons.email, color: Colors.black54,),
-                        nameController
-                    ),
-
-                      myFormField(
-                          context,
-                          "website",
-                          const Icon(Icons.email, color: Colors.black54,),
-                          websiteController
-                      ),
-                      myFormField(
-                          context,
-                          "telephone",
-                          const Icon(Icons.email, color: Colors.black54,),
-                         telephoneController
-                      ),
-
-                      myFormField(
-                          context,
-                          "location",
-                          const Icon(Icons.email, color: Colors.black54,),
-                          locationController
-                      ),
-
-
-                        myFormField(
-                            context,
-                            "description",
-                            const Icon(Icons.email, color: Colors.black54,),
-                            descriptionController
-                        ),
-
-                      myFormField(
-                          context,
-                          "category",
-                          const Icon(Icons.email, color: Colors.black54,),
-                          enterpriseCategoryController
-                      ),
-
-                        myFormField(
-                            context,
-                            "country",
-                            const Icon(Icons.email, color: Colors.black54,),
-                            countryController
-                        ),
-
-
-                        const SizedBox(height: 15,),
-
-                        MaterialButton(
-                            onPressed: () async{
-                              var id = idController.value.text;
-                              var name = nameController.value.text;
-                              var website =websiteController.value.text;
-                              var location = locationController.value.text;
-                              var description= descriptionController.value.text;
-                              var category = enterpriseCategoryController.value.text;
-                              var country = countryController.value.text;
-                              var telephone = telephoneController.value.text;
-
-                              try{
-
-                              } catch(e){
-                                print("There was an error at $e");
-                              }
-
-                            },
-
-                          child:  Text(
-                            "Create enterprise",
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor
-                            ),
-                          ),
-                        )
-
-
-
-                  ],
-                    ),
-                  );
-                }
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (_)=> const EnterpriseForm()));
 
           },
           backgroundColor: Theme.of(context).primaryColor,

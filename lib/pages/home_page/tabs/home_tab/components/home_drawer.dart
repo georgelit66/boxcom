@@ -1,57 +1,38 @@
-
-import 'package:boxcom/pages/account/user_account.dart';
+import 'package:boxcom/pages/account/my_account.dart';
+import 'package:boxcom/pages/favourites/favourites_page.dart';
+import 'package:boxcom/widgets/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Widget returnDrawer(BuildContext context) {
-  return Drawer(
-      elevation: 12,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children:  <Widget>[
-          DrawerHeader(
-            decoration: const BoxDecoration(
+class AppDrawer extends StatefulWidget {
+  const AppDrawer({Key? key}) : super(key: key);
 
-              color: Colors.white,
-            ),
-            child: Center(
-              child:Stack(
-                children:  [
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
 
-                  Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 4.0,
-                            color: Theme.of(context).backgroundColor
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                              offset: const Offset(0,10)
-                          )
-                        ],
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                            image: AssetImage(
-                                'assets/images/stmarksbasilica.jpg'
-                            ),
-                            fit: BoxFit.cover
-                        )
-                    ),
-                  ),
+class _AppDrawerState extends State<AppDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        elevation: 12,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children:  <Widget>[
+            DrawerHeader(
+              decoration: const BoxDecoration(
 
+                color: Colors.white,
+              ),
+              child: Center(
+                  child:Stack(
+                    children:  [
 
-                  Positioned(
-                    bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40.0,
-                        width: 40.0,
-                        decoration:BoxDecoration(
+                      Container(
+                        width: 140,
+                        height: 140,
+                        decoration: BoxDecoration(
                             border: Border.all(
                                 width: 4.0,
                                 color: Theme.of(context).backgroundColor
@@ -64,141 +45,181 @@ Widget returnDrawer(BuildContext context) {
                                   offset: const Offset(0,10)
                               )
                             ],
-                          color: Theme.of(context).primaryColor,
-                          shape: BoxShape.circle
+                            shape: BoxShape.circle,
+                            image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/stmarksbasilica.jpg'
+                                ),
+                                fit: BoxFit.cover
+                            )
                         ),
-                        child: const Icon(
-                            Icons.enhance_photo_translate_outlined,
-                          color: Colors.white,
-                        ),
+                      ),
+
+
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40.0,
+                            width: 40.0,
+                            decoration:BoxDecoration(
+                                border: Border.all(
+                                    width: 4.0,
+                                    color: Theme.of(context).backgroundColor
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: const Offset(0,10)
+                                  )
+                                ],
+                                color: Theme.of(context).primaryColor,
+                                shape: BoxShape.circle
+                            ),
+                            child: const Icon(
+                              Icons.enhance_photo_translate_outlined,
+                              color: Colors.white,
+                            ),
+                          )
                       )
+                    ],
                   )
-                ],
-              )
+              ),
             ),
-          ),
 
-          const Divider(height: 2,),
+            const Divider(height: 2,),
 
-          InkWell(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const UserAccount()));
-            },
-            child: ListTile(
-              leading: Icon(
+            InkWell(
+              onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyAccount()));
+              },
+              child:  ListTile(
+                leading: const Icon(
                   Icons.perm_identity_sharp,
-                  color: Theme.of(context).primaryColor,
-              ),
-              title: const Text(
-                  "My Account",
-                  style: TextStyle(
+                  color: Colors.cyan,
                 ),
-              ),
-              trailing: const Icon(CupertinoIcons.forward) ,
-            ),
-          ),
-
-
-
-          const SizedBox(height: 5.0,),
-
-          ListTile(
-            leading: Icon(
-                Icons.settings,
-                color: Theme.of(context).primaryColor,
-            ),
-            title: const Text(
-                "Settings",
-              style: TextStyle(
-              ),
-            ),
-            trailing: const Icon(CupertinoIcons.forward) ,
-          ),
-
-          const SizedBox(height: 5.0,),
-
-         ListTile(
-              leading: Icon(
-                Icons.data_usage_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
-              title: const Text(
-                "Mes Enregistrements",
-                style: TextStyle(
+                title: Text(
+                  AppLocalizations.of(context)!.account,
+                  style: const TextStyle(
+                  ),
                 ),
-              ),
-              trailing: const Icon(CupertinoIcons.forward)
-          ),
-
-
-          const SizedBox(height: 5.0,),
-
-         ListTile(
-            leading: Icon(
-                Icons.help_center_outlined,
-                color: Theme.of(context).primaryColor,
-            ),
-            title: const Text(
-                "Help Center",
-              style: TextStyle(
+                trailing: const Icon(CupertinoIcons.forward) ,
               ),
             ),
-            trailing: const Icon(CupertinoIcons.forward) ,
-          ),
 
 
-          const SizedBox(height: 5.0,),
 
-          ListTile(
-            leading: Icon(
-                Icons.language_outlined,
-                color: Theme.of(context).primaryColor,
-            ),
-            title: const Text(
-                "Language",
-              style: TextStyle(
+            const SizedBox(height: 5.0,),
+
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const Settings()));
+              },
+              child:  ListTile(
+                leading: const Icon(
+                  Icons.settings,
+                  color: Colors.cyan,
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.settings,
+                  style: const TextStyle(
+                  ),
+                ),
+                trailing: const Icon(CupertinoIcons.forward) ,
               ),
             ),
-            trailing: const Icon(CupertinoIcons.forward),
 
-          ),
+            const SizedBox(height: 5.0,),
 
-          ListTile(
-            leading: Icon(
-                CupertinoIcons.moon_fill,
-                color: Theme.of(context).primaryColor,
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyAccount()));
+              },
+              child: ListTile(
+                  leading: const Icon(
+                    Icons.data_usage_outlined,
+                    color: Colors.cyan,
+                  ),
+                  title: Text(
+                    AppLocalizations.of(context)!.storedFiles,
+                    style: const TextStyle(
+                    ),
+                  ),
+                  trailing: const Icon(CupertinoIcons.forward)
+              ),
             ),
-            title: const Text(
-                "Themes",
-              style: TextStyle(
+
+
+            const SizedBox(height: 5.0,),
+
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyAccount()));
+              },
+              child: ListTile(
+                leading: const Icon(
+                  Icons.help_center_outlined,
+                  color: Colors.cyan,
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.helpCenter,
+                  style: const TextStyle(
+                  ),
+                ),
+                trailing: const Icon(CupertinoIcons.forward) ,
+              ),
+            ),
+
+
+
+
+
+            const SizedBox(height: 5.0,),
+
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const Favourites()));
+
+              },
+              child: ListTile(
+                leading: const Icon(
+                  CupertinoIcons.heart,
+                  color: Colors.cyan,
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.favourites,
+                  style: const TextStyle(
+                  ),
+                ),
+                trailing: const Icon(CupertinoIcons.forward),
 
               ),
             ),
-            trailing: const Icon(CupertinoIcons.forward),
 
-          ),
-          const SizedBox(height: 5.0,),
+            const SizedBox(height: 5.0,),
 
-         ListTile(
-            leading: Icon(
+            ListTile(
+              leading: const Icon(
                 CupertinoIcons.nosign,
-                color: Theme.of(context).primaryColor,
-            ),
-            title: const Text(
-                "Logout",
-              style: TextStyle(
+                color: Colors.cyan,
               ),
+              title: Text(
+                AppLocalizations.of(context)!.logout,
+                style: const TextStyle(
+                ),
+              ),
+              trailing: const Icon(CupertinoIcons.forward),
+
             ),
-            trailing: const Icon(CupertinoIcons.forward),
-
-
-          ),
 
 
 
 
-        ],
-      )
+          ],
+        )
 
-  );
+    );
+  }
 }

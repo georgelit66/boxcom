@@ -1,10 +1,8 @@
 import 'package:boxcom/models/enterprise_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snack.dart';
 import '../../enterprise_tab/enterprise_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EnterpriseCard extends StatefulWidget {
   const EnterpriseCard({Key? key, required this.enterprise}) : super(key: key);
@@ -70,6 +68,8 @@ class _EnterpriseCardState extends State<EnterpriseCard> {
               ),
 
 
+
+
               Padding(
                 padding:const EdgeInsets.symmetric(horizontal: 6.0),
                 child: Text(
@@ -94,13 +94,13 @@ class _EnterpriseCardState extends State<EnterpriseCard> {
                     _isSubscribed = !_isSubscribed;
                   });
 
-                  Get.snackbar(
-                      "Follow Action",
-                     _isSubscribed ?  "you followed ${ widget.enterprise.name}": "you are unfollowing ${ widget.enterprise.name}",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.black54,
-                      colorText: Colors.white
+                  final snackBar = SnackBar(
+                      content: Text(
+                        _isSubscribed ?  "you followed ${ widget.enterprise.name}": "you are unfollowing ${ widget.enterprise.name}",
+                      )
                   );
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
                 child: !_isSubscribed ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -110,18 +110,18 @@ class _EnterpriseCardState extends State<EnterpriseCard> {
                     height: 30,
 
                     decoration: BoxDecoration(
-                     gradient:  LinearGradient(
+                     gradient:  const LinearGradient(
                        colors: [
-                         Theme.of(context).indicatorColor,
-                         Theme.of(context).primaryColor
+                         Colors.cyan,
+                         Colors.cyanAccent
                        ]
                      ),
                       borderRadius: BorderRadius.circular(10),
 
                     ),
-                    child: const Text(
-                      "S'abonner",
-                      style: TextStyle(
+                    child:  Text(
+                      AppLocalizations.of(context)!.subscribe,
+                      style: const TextStyle(
                           color: Colors.white ,
                           fontWeight: FontWeight.w600,
                           fontSize: 16.0
@@ -132,17 +132,16 @@ class _EnterpriseCardState extends State<EnterpriseCard> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
                     alignment: Alignment.center,
-                    padding:const EdgeInsets.all(1.0),
+
                     height: 30,
 
                     decoration: BoxDecoration(
-                      color:  Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color:  Theme.of(context).primaryColor)
+                      border: Border.all(color:  Theme.of(context).primaryColor, width: 2)
 
                     ),
                     child: Text(
-                      "Desabonner",
+                      AppLocalizations.of(context)!.unsubscribe,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w600,

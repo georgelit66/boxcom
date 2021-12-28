@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-import 'photo_zoom.dart';
-
 class Post extends StatefulWidget {
   final Enterprise post;
   Post({required this.post});
@@ -98,7 +96,7 @@ var _showDescription = false;
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              WebViewPage(enterprise: widget.post,)));
+                              WebViewPage(website: widget.post.website,)));
                 },
               ),
               IconButton(

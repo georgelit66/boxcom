@@ -44,38 +44,73 @@ class _RegisterState extends State<Register> {
 
               myFormField(
                   context,
-                  "id",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  idController
-              ),
-
-              myFormField(
-                  context,
                   "Name",
+                  const Icon(Icons.person, color: Colors.black54,),
+                  idController,
+                 1
+              ),
+
+              myFormField(
+                  context,
+                  "Surname",
+                  const Icon(Icons.person, color: Colors.black54,),
+                  nameController,
+                1
+              ),
+
+              myFormField(
+                  context,
+                  "Password",
                   const Icon(Icons.email, color: Colors.black54,),
-                  nameController
+                  genderController,1
+              ),
+
+              Row(
+                children: [
+
+                  Expanded(
+                    child: myFormField(
+                        context,
+                        "Date of Birth",
+                        const Icon(Icons.calendar_today, color: Colors.black54,),
+                      genderController,
+                      1
+                    ),
+                  ),
+
+                  const SizedBox(width: 10,),
+
+                  IconButton(
+                      onPressed: (){
+                        showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2018),
+                            lastDate: DateTime(2030)
+                        ).then((value) => {
+                          setState(() {
+
+                          })
+                        });
+                      },
+                      icon: const Icon(Icons.calendar_today)
+                  )
+                ],
               ),
 
               myFormField(
                   context,
-                  "surname",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  surnameController
-              ),
-
-              myFormField(
-                  context,
-                  "town",
+                  "Country",
                   const Icon(Icons.password, color: Colors.black54,),
-                  townController
+                  townController,1
               ),
 
 
               myFormField(
                   context,
-                  "country",
+                  "Telephone",
                   const Icon(Icons.password, color: Colors.black54,),
-                  countryController
+                  countryController,1
               ),
 
 
@@ -84,7 +119,7 @@ class _RegisterState extends State<Register> {
                   context,
                   "gender",
                   const Icon(Icons.email, color: Colors.black54,),
-                  genderController
+                  genderController,1
               ),
 
 
@@ -105,13 +140,15 @@ class _RegisterState extends State<Register> {
 
 
                   var user = User(
-                      id: int.parse(id),
+                      telephone: id,
                       name: name,
                       surname: surname,
                       gender: gender,
                       town: town,
                       country: country,
-                      state: 0
+                      password: "",
+                      email: '',
+                      dateOfBirth: DateTime.now()
                   );
 
                   try{
@@ -130,8 +167,8 @@ class _RegisterState extends State<Register> {
                   decoration: BoxDecoration(
                       gradient: const LinearGradient(
                           colors: [
-                            Colors.green,
-                            Colors.greenAccent
+                            Colors.cyan,
+                            Colors.cyanAccent
                           ]
                       ),
                       borderRadius: BorderRadius.circular(30)
@@ -178,7 +215,7 @@ class _RegisterState extends State<Register> {
                       "Sign in",
                       style: TextStyle(
                           fontSize: 17,
-                          color: Colors.green
+                          color: Colors.cyan
                       ),
                     ),
                   )

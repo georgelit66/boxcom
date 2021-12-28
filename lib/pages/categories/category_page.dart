@@ -27,7 +27,7 @@ class _CategoryPageState extends State<CategoryPage> {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black87,
+            color: Colors.black54,
           ),
         ),
         backgroundColor: Colors.white,
@@ -50,7 +50,6 @@ class _CategoryPageState extends State<CategoryPage> {
             child: Text(
               widget.category.category,
               style: const TextStyle(
-                color: Colors.black54,
                 fontSize: 21,
                 fontWeight: FontWeight.w700
               ),

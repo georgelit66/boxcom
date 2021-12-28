@@ -1,0 +1,56 @@
+{
+  "language": "Francais",
+  "helloWorld": "Salut Monde",
+  "hello": "{username} monde",
+  "appName": "Boxcom ",
+
+  "homeTab" : "Accuile",
+  "enterpriseTab": "Enterprise",
+  "boutiqueTab": "Boutique",
+
+
+  "clothesCategory": "Habilles",
+  "automobileCategory": "Automobile",
+  "gadgetsCategory": "Gadgets",
+  "phoneCategory" : "Telephone",
+  "estateCategory": "Immobilier",
+
+
+
+  "account" : "Mon Compte",
+  "settings": "Parametre",
+  "storedFiles": "Mes Fiches Enregistre",
+  "helpCenter": "Centre D´information",
+  "favourites": "Favoris",
+  "logout": "Se Deconnecte",
+
+
+
+
+  "subscriptions":"Abonnements",
+  "myEnterprises": "Mes Enterprises",
+  "myBoutiques": "Mes Boutiques",
+
+  "subscribe": "S´abonner",
+  "unsubscribe": "Desabonner",
+  "search": "Recherche",
+
+  "searchResults": "Resultat de Recherche",
+
+  "seeMore": "Voir Plus",
+
+  "darkTheme": "Mode Sombre",
+
+  "signal" : "Signale",
+  "downloadPhoto": "Telecharge la photo",
+  "maskPost": "Masque la publication",
+  "saveProduct": "Enregistrer le produit",
+  "savePost": "Enregistrer la publication",
+
+
+  "retail": "Vente",
+  "beauty": "Beaute",
+  "technology": "Technologie",
+  "construction": "Construction",
+  "transport": "Transport"
+}

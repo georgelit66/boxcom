@@ -1,5 +1,5 @@
 import 'package:boxcom/data/enterprises.dart';
-import 'package:boxcom/models/user_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:boxcom/pages/home_page/tabs/components/list_enterprises_boutiques_item.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/home_drawer.dart';
 import 'package:boxcom/pages/home_page/components/home_search.dart';
@@ -26,12 +26,12 @@ class _MainHomePageState extends State<MainHomePage> {
 
       length: 3,
       child:Scaffold(
-        drawer: returnDrawer(context),
+        drawer: const AppDrawer(),
         body: NestedScrollView(
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxScrolled)=>[
                SliverAppBar(
-                 backgroundColor: Colors.white,
+                 backgroundColor: Theme.of(context).backgroundColor,
 
                 pinned: true,
                 floating: true,
@@ -44,12 +44,13 @@ class _MainHomePageState extends State<MainHomePage> {
                         icon:const Icon(
                           Icons.menu_outlined,
                           size: 30.0,
-                          color:Colors.black54,
                         )
                     )
                 )),
 
-                title: Text("Boxcom", style: TextStyle(color:Theme.of(context).primaryColor ),),
+                title: Text(
+                  AppLocalizations.of(context)!.appName,
+                style: TextStyle(color:Theme.of(context).primaryColor ),),
 
 
                 actions: [
@@ -61,10 +62,11 @@ class _MainHomePageState extends State<MainHomePage> {
                       },
                       icon:const Icon(
                         Icons.search,
-                        color:Colors.black54,
                         size: 30,
                       )
                   ),
+
+
 
 
                 ],
@@ -74,10 +76,10 @@ class _MainHomePageState extends State<MainHomePage> {
                   labelColor: Theme.of(context).primaryColor,
                   indicatorColor:  Theme.of(context).indicatorColor,
                   indicatorWeight: 5,
-                  tabs: const [
-                    Tab(icon: Icon(Icons.home), text: "Home",),
-                    Tab(icon: Icon(Icons.apartment_sharp), text: "Enterprise",),
-                    Tab(icon: Icon(Icons.shopping_cart), text: "Boutiques",),
+                  tabs:  [
+                    Tab(icon: const Icon(Icons.home), text:  AppLocalizations.of(context)!.homeTab,),
+                    Tab(icon: const Icon(Icons.apartment_sharp), text: AppLocalizations.of(context)!.enterpriseTab),
+                    Tab(icon: const Icon(Icons.shopping_cart), text:AppLocalizations.of(context)!.boutiqueTab,),
 
 
                   ],

@@ -1,6 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:boxcom/data/enterprises.dart';
-import 'package:boxcom/models/enum/post_type.dart';
-
 import 'package:boxcom/models/post_model.dart';
 import 'package:boxcom/pages/comments/coment_screen.dart';
 import 'package:boxcom/pages/home_page/tabs/enterprise_tab/enterprise_detail.dart';
@@ -8,13 +8,16 @@ import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_video.dart'
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/video_full_screen.dart';
 import 'package:boxcom/pages/home_page/tabs/components/post_menu.dart';
 import 'package:boxcom/pages/home_page/tabs/components/web_view.dart';
-import 'package:boxcom/util/theme_config.dart';
+import 'package:boxcom/util/theme_provider.dart';
 import 'package:boxcom/widgets/image_info.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share/share.dart';
 import 'package:video_player/video_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home_post_photo_video_detail.dart';
 
@@ -99,7 +102,7 @@ class _PostHomeState extends State<PostHome> {
                          },
                          child: widget.post.imageUrl!.isEmpty ?  GestureDetector(
                                onTap: (){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoFullScreen(controller: _controller)));
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoFullScreen(controller: _controller, post: widget.post)));
                                },
                                child:
                                  Stack(
@@ -197,7 +200,7 @@ class _PostHomeState extends State<PostHome> {
                                            ),
                                            child: IconButton(
                                                onPressed: (){
-                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoFullScreen(controller: _controller)));
+                                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoFullScreen(controller: _controller, post: widget.post)));
                                                },
                                                icon: const Icon(
                                                Icons.fullscreen,
@@ -262,8 +265,10 @@ class _PostHomeState extends State<PostHome> {
   }
 
   Widget postHeader() {
-var locale = 'fr';
+
 timeago.setLocaleMessages('fr', timeago.FrMessages());
+var currentLocale =AppLocalizations.of(context)!.localeName;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,17 +300,21 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
          ),
           title: Text(
             widget.post.name,
-            style: ThemeConfig.lightTextTheme.headline3
+            style: ThemeNotifier.lightTextTheme.headline3
           ),
           subtitle: Text(
 
-            timeago.format(DateTime.parse(widget.post.time),locale: locale),
+            timeago.format(DateTime.parse(widget.post.time),locale: currentLocale),
+            style: const TextStyle(
+              color: Colors.black54
+            ),
           ),
           trailing: Wrap(
             children: <Widget>[
               IconButton(
                 icon: const Icon(
                   Icons.language_outlined,
+                  color: Colors.black54,
                   size: 25,
                 ),
                 onPressed: () {
@@ -313,12 +322,12 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              WebViewPage(enterprise: enterprises[4],)));
+                              WebViewPage(website: widget.post.website)));
                 },
               ),
 
 
-              widget.post.imageUrl!.isNotEmpty ?  popUpMenuImage(Colors.black54, widget.post) :popUpMenuVideo(Colors.black54, widget.post)
+              widget.post.imageUrl!.isNotEmpty ? PopUpMenuImage(color: Colors.black54, post: widget.post) : PopUpMenuVideo( post: widget.post, color: Colors.black54,)
             ],
           ),
         ),
@@ -337,14 +346,14 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
                 children: [
                   Text(
                     widget.post.description!,
-                    style:ThemeConfig.lightTextTheme.bodyText1,
+                    style:ThemeNotifier.lightTextTheme.bodyText1,
                     maxLines: 2,
                     overflow:  TextOverflow.ellipsis ,
                   ),
 
                   widget.post.description!.length >= 100 ?
                   Text(
-                    "Voir plus",
+                    AppLocalizations.of(context)!.seeMore,
                     style: TextStyle(
                         color:Theme.of(context).primaryColor
                     ),
@@ -354,7 +363,7 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
                 ],
               ) :  Text(
                 widget.post.description!,
-                style: ThemeConfig.lightTextTheme.bodyText1,
+                style: ThemeNotifier.lightTextTheme.bodyText1,
                 overflow:  TextOverflow.visible,
               ),
             )
@@ -380,7 +389,6 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
             },
             child: Container(
               decoration: const BoxDecoration(
-                  color: Colors.white
               ),
 
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical:0),
@@ -415,7 +423,6 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
             } ,
             child:  Container(
               decoration: const BoxDecoration(
-                  color: Colors.white
               ),
 
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical:0),
@@ -439,15 +446,26 @@ timeago.setLocaleMessages('fr', timeago.FrMessages());
           ),
 
 
-          Row(
-            children: const [
-              Icon(
-                Icons.share,
-                color: Colors.black54,
-              ),
-              SizedBox(width: 10,),
+          InkWell(
+            onTap: ()async {
+              final ByteData bytes = await rootBundle.load(widget.post.imageUrl!);
+              final Uint8List list = bytes.buffer.asUint8List();
 
-            ],
+              final tempDir = await getTemporaryDirectory();
+              final file = await File('${tempDir.path}/image.jpg').create();
+              file.writeAsBytes(list);
+              Share.shareFiles([(file.path)]);
+            },
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.share,
+                  color: Colors.black54,
+                ),
+                SizedBox(width: 10,),
+
+              ],
+            ),
           ),
 
         ],

@@ -7,14 +7,12 @@ import 'package:boxcom/data/enterprises.dart';
 import 'package:boxcom/data/posts.dart';
 import 'package:boxcom/models/category_model.dart';
 import 'package:boxcom/models/enterprise_model.dart';
-import 'package:boxcom/repositories/enterprise_repository.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/home_enterprise_card.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_view_home.dart';
 import 'package:boxcom/pages/categories/category_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 
 
 
@@ -36,56 +34,51 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   var isSubscribed = false;
-  var isDarkMode = false;
   int _selectedIndex = 0;
 
 
   late List<Enterprise> enterprisePost;
 
 
-  final List<CategoryModel> _icons = [
-    CategoryModel(icon: Icons.shop, category: "Clothes", items: [clothes]),
-    CategoryModel(icon: Icons.drive_eta, category: "Automobile", items: [automobile]),
-    CategoryModel(icon: Icons.headset_rounded, category: "Gadgets", items: [gadgets]),
-    CategoryModel(icon: Icons.phone_android_outlined, category: "Phones", items: [phones]),
-    CategoryModel(icon: Icons.house_outlined, category: "Estate", items: [houses]),
-  ];
+ List<CategoryModel> returnCategories(BuildContext context){
+   final List<CategoryModel> _icons = [
+     CategoryModel(icon: Icons.shop, category: AppLocalizations.of(context)!.clothesCategory, items: [clothes]),
+     CategoryModel(icon: Icons.drive_eta, category:  AppLocalizations.of(context)!.automobileCategory, items: [automobile]),
+     CategoryModel(icon: Icons.headset_rounded, category:  AppLocalizations.of(context)!.gadgetsCategory, items: [gadgets]),
+     CategoryModel(icon: Icons.phone_android_outlined, category:  AppLocalizations.of(context)!.phoneCategory, items: [phones]),
+     CategoryModel(icon: Icons.house_outlined, category: AppLocalizations.of(context)!.estateCategory, items: [houses]),
+   ];
+   return _icons;
+ }
 
-  Widget _buildIcon(int index) {
+  Widget _buildIcon(int index ,BuildContext context) {
     return GestureDetector(
         onTap: () {
           setState(() {
             _selectedIndex = index;
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryPage(category: _icons[_selectedIndex],)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryPage(category: returnCategories(context)[_selectedIndex],)));
           });
         },
         child: Column(
           children: [
             Container(
-              height: 40.0,
-              width: 40.0,
+              height: 35.0,
+              width: 35.0,
               decoration: BoxDecoration(
 
-               gradient :const LinearGradient(
-                    colors: [
-                      Colors.black26,
-                      Colors.black26
-                    ],
-                  )  ,
+
+
+               color: Theme.of(context).indicatorColor,
 
                   borderRadius: BorderRadius.circular(30.0)),
-              child: Icon(_icons[index].icon,
+              child: Icon(returnCategories(context)[index].icon,
                   size: 25.0,
-                  color: _selectedIndex == index
-                      ? Colors.white
-                      : Colors.white),
+                color: Theme.of(context).backgroundColor,
+                  ),
             ),
             Text(
-              _icons[index].category,
-              style: const TextStyle(
-                  color:   Colors.black54,
-                  fontSize: 13.0
-              ),
+              returnCategories(context)[index].category,
+
             ),
           ],
         ));
@@ -93,19 +86,6 @@ class _HomeTabState extends State<HomeTab> {
 
 
 
-
-
-  Future<List<Enterprise>> loadData() async{
-   enterprisePost= Get.put(EnterpriseRepository().fetchEnterprises());
-   return enterprisePost;
-
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,14 +136,14 @@ class _HomeTabState extends State<HomeTab> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child:  ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _icons.length,
+                itemCount: returnCategories(context).length,
                 itemBuilder: (BuildContext context, int index) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                     children: [
                       const SizedBox(width: 20),
-                      _buildIcon(index),
+                      _buildIcon(index, context),
                       const SizedBox(width: 20),
                     ],
                   );

@@ -1,6 +1,7 @@
 import 'package:boxcom/pages/categories/components/category_sort.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoutiqueSearch extends StatefulWidget {
   const BoutiqueSearch({Key? key}) : super(key: key);
@@ -24,10 +25,10 @@ class _BoutiqueSearchState extends State<BoutiqueSearch> {
           ),
         ),
         backgroundColor: Colors.white,
-        title: const TextField(
+        title:  TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(
-            hintText: 'Search Boutique...',
+            hintText: "${ AppLocalizations.of(context)!.search} Boutique",
           ),
 
         ),
@@ -35,9 +36,9 @@ class _BoutiqueSearchState extends State<BoutiqueSearch> {
           CategorySort()
         ],
       ),
-      body: const Center(
+      body:  Center(
         child: Text(
-          "Search results."
+            AppLocalizations.of(context)!.searchResults
         ),
       )
     );

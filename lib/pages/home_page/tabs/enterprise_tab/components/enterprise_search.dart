@@ -1,6 +1,7 @@
 import 'package:boxcom/pages/categories/components/category_sort.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EnterpriseSearch extends StatefulWidget {
   const EnterpriseSearch({Key? key}) : super(key: key);
@@ -24,10 +25,10 @@ class _EnterpriseSearchState extends State<EnterpriseSearch> {
           ),
         ),
         backgroundColor: Colors.white,
-        title: const TextField(
+        title:TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(
-            hintText: 'Search Enterprise...',
+            hintText: "${AppLocalizations.of(context)!.search} ${AppLocalizations.of(context)!.enterpriseTab}",
           ),
 
         ),
@@ -35,9 +36,9 @@ class _EnterpriseSearchState extends State<EnterpriseSearch> {
           CategorySort()
         ],
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          "Search results."
+            AppLocalizations.of(context)!.searchResults
         ),
       )
     );

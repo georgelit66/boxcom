@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget myFormField(BuildContext context, String hint,Icon icon, TextEditingController controller) {
+Widget myFormField(BuildContext context, String hint,Icon icon, TextEditingController controller, int maxLines) {
   return Container(
       height: 45,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -18,15 +18,14 @@ Widget myFormField(BuildContext context, String hint,Icon icon, TextEditingContr
         ],
       ),
       child:  TextField(
-
+          maxLines: maxLines,
           controller: controller,
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               border: InputBorder.none,
+              fillColor: Colors.black54,
               hintText: hint,
               hintStyle: const TextStyle(color: Colors.black54),
-
-
               prefixIcon:  SizedBox(
                   width: 50,
                   child: Align(

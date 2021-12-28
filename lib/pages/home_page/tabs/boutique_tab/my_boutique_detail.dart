@@ -195,53 +195,96 @@ class _MyBoutiqueDetailState extends State<MyBoutiqueDetail> {
                   ],
                 ),
 
-                Wrap(
+
+
+                Row(
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueEdit(boutique: widget.boutique)));
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                            gradient:  LinearGradient(
-                                colors: [
-                                  Theme.of(context).indicatorColor,
-                                  Theme.of(context).primaryColor
-                                ]
-                            ),
+                    Wrap(
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueEdit(boutique: widget.boutique)));
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                gradient:  LinearGradient(
+                                    colors: [
+                                      Theme.of(context).indicatorColor,
+                                      Theme.of(context).primaryColor
+                                    ]
+                                ),
+                              ),
+                              child:  Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  child: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.edit,
+                                        size: 17,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(width: 5.0,),
+                                      Text(
+                                        "Edit",
+                                        style: TextStyle(
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                              )
                           ),
-                          child:  Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.edit,
-                                    size: 17,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5.0,),
-                                  Text(
-                                    "Edit",
-                                    style: TextStyle(
-                                        color: Colors.white
+                        ),
+
+
+                        const SizedBox(width: 10.0,),
+
+                        Wrap(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueEdit(boutique: widget.boutique)));
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    gradient:  LinearGradient(
+                                        colors: [
+                                          Theme.of(context).indicatorColor,
+                                          Theme.of(context).primaryColor
+                                        ]
                                     ),
                                   ),
-                                ],
-                              )
-                          )
-                      ),
-                    ),
-
-
-                    const SizedBox(width: 15.0,),
-
-
-
+                                  child:  Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.add,
+                                            size: 17,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 5.0,),
+                                          Text(
+                                            "Post",
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                  )
+                              ),
+                            ),
+                      ],
+                    )
                   ],
                 )
+
               ],
             )
+        ]),
         ),
 
         const SizedBox(height: 5.0,),

@@ -1,11 +1,12 @@
+import 'package:boxcom/pages/home_page/tabs/boutique_tab/components/boutique_form.dart';
 import 'package:boxcom/pages/home_page/tabs/boutique_tab/components/boutique_search.dart';
-import 'package:boxcom/repositories/boutique_repository.dart';
+import 'package:boxcom/pages/home_page/tabs/boutique_tab/controller/boutique_provider.dart';
 import 'package:boxcom/pages/home_page/tabs/components/list_enterprises_boutiques_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+import 'package:provider/provider.dart';
 import 'components/sort_boutique.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoutiqueTab extends StatefulWidget {
   const BoutiqueTab({Key? key}) : super(key: key);
@@ -23,9 +24,8 @@ var _selectedIndex = 0;
 @override
   Widget build(BuildContext context) {
 
-    final width = MediaQuery.of(context).size.width;
 
-    final boutiqueData = Get.put(BoutiqueRepository().fetchBoutiques());
+    final boutiqueProvider = context.watch<BoutiqueProvider>().getBoutiques();
 
     return Scaffold(
       body: Column(
@@ -43,24 +43,13 @@ var _selectedIndex = 0;
                       "Boutiques",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                          color: Colors.black54
+                          fontSize: 22
                       ),
                     ),
 
                     Row(
                       children: [
-                        IconButton(
-                            onPressed: (){
 
-                            },
-                            icon: const Icon(
-                                Icons.settings,
-                                color: Colors.black54
-                            )
-                        ),
-
-                        const SizedBox(width: 5.0,),
 
                         IconButton(
                             onPressed: (){
@@ -68,7 +57,6 @@ var _selectedIndex = 0;
                             },
                             icon: const Icon(
                                 Icons.search,
-                                color: Colors.black54
                             )
                         ),
 
@@ -121,10 +109,10 @@ var _selectedIndex = 0;
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
 
-                              child: const Center(
+                              child:  Center(
                                 child:  Text(
-                                  "Abonnements",
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.subscriptions,
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600
@@ -153,10 +141,10 @@ var _selectedIndex = 0;
                                   borderRadius: BorderRadius.circular(30.0)
                               ),
 
-                              child: const Center(
+                              child:  Center(
                                 child:  Text(
-                                  "Mes Boutiques",
-                                  style: TextStyle(
+                                 AppLocalizations.of(context)!.myBoutiques,
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w600
@@ -182,9 +170,9 @@ var _selectedIndex = 0;
             flex: 5,
             child: _selectedIndex == 0?  ListView.builder(
                 padding: const EdgeInsets.only(top: 0),
-                itemCount: boutiqueData.length,
+                itemCount:boutiqueProvider.length,
                 itemBuilder: (BuildContext context, int index){
-                  var boutique = boutiqueData[index];
+                  var boutique =boutiqueProvider[index];
                   return Column(
                     children: [
                       boutiqueTile(boutique, context),
@@ -197,7 +185,7 @@ var _selectedIndex = 0;
               padding: const EdgeInsets.only(bottom: 70, top: 0),
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index){
-                  var boutique = boutiqueData[index];
+                  var boutique = boutiqueProvider[index];
                   return myBoutiqueTile(boutique, context);
                 }
             )
@@ -209,10 +197,7 @@ var _selectedIndex = 0;
 
      floatingActionButton: _selectedIndex == 1 ?   FloatingActionButton(
        onPressed: (){
-         Get.snackbar(
-           "Add BOUTIQUE",
-           "NOT IMPLEMENTED",
-         );
+         Navigator.push(context, MaterialPageRoute(builder: (context)=> const BoutiqueForm()));
        },
        backgroundColor: Theme.of(context).primaryColor,
        child: const Icon(Icons.add ,color: Colors.white,),

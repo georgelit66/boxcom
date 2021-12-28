@@ -1,36 +1,40 @@
-import 'package:boxcom/pages/splash_screen/splash_page.dart';
-import 'package:boxcom/util/theme_config.dart';
+import 'package:boxcom/pages/splash_screen/splash_screen.dart';
+import 'package:boxcom/util/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'l10n/l10n.dart';
+import 'util/language_provider.dart';
+
 
 class MyApp extends StatelessWidget {
-   MyApp({Key? key}) : super(key: key);
+   const MyApp({Key? key}) : super(key: key);
 
   @override
-  var theme = ThemeConfig();
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
-        home: const MyHomePage(),
-        debugShowCheckedModeBanner: false,
-        theme: theme.lightTheme
+
+    final notifier = context.watch<ThemeNotifier>();
+    final localProvider = context.watch<LocaleProvider>();
+    return MaterialApp(
+    theme: notifier.darkTheme ? notifier.dark : notifier.light,
+    debugShowCheckedModeBanner: false,
+    locale: localProvider.locale,
+    supportedLocales: L10n.all,
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    home: const SplashScreen()
     );
+
+
+
+
+
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return const SplashScreen();
-  }
-}

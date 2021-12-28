@@ -7,7 +7,6 @@ import 'package:boxcom/pages/home_page/tabs/enterprise_tab/enterprise_detail.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EnterpriseTile extends StatefulWidget {
@@ -57,7 +56,6 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                   child:    Text(
                     '${4} followers',
                     style: GoogleFonts.lato(
-                        color: Colors.grey[500],
                         letterSpacing: 0.5,
                         fontSize: 13,
                         fontWeight: FontWeight.normal),
@@ -71,12 +69,7 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                       setState(() {
                         _isFollowing = !_isFollowing;
                       });
-                      Get.snackbar(
-                          "follow", "you unfollowed ${ widget.enterprise.name}",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.black54,
-                          colorText: Colors.white
-                      );
+
                     },
                     child: !_isFollowing ? Container(
 
@@ -200,7 +193,6 @@ Widget boutiqueTile(Boutique boutique, BuildContext context){
                 child:    Text(
                   '${boutique.followers} followers',
                   style: GoogleFonts.lato(
-                      color: Colors.grey[500],
                       letterSpacing: 0.5,
                       fontSize: 13,
                       fontWeight: FontWeight.normal),
@@ -210,12 +202,7 @@ Widget boutiqueTile(Boutique boutique, BuildContext context){
 
               GestureDetector(
                   onTap: (){
-                    Get.snackbar(
-                        "follow", "you followed ${boutique.name}",
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.black54,
-                        colorText: Colors.white
-                    );
+
                   },
                   child: Container(
                  

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({Key? key, required this.enterprise}) : super(key: key);
+  const WebViewPage({Key? key, required this.website}) : super(key: key);
 
-  final Enterprise enterprise;
+  final String website;
 
   @override
   _WebViewPageState createState() => _WebViewPageState();
@@ -22,8 +22,7 @@ class _WebViewPageState extends State<WebViewPage> {
   @override
   Widget build(BuildContext context) {
 
-    var url = widget.enterprise.website;
-    var title = widget.enterprise.name;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -49,16 +48,7 @@ class _WebViewPageState extends State<WebViewPage> {
 
 
 
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600
-          ),
-        ),
+
       ),
       body: Column(
         children: [
@@ -72,7 +62,7 @@ class _WebViewPageState extends State<WebViewPage> {
             child: Stack(
               children: [
                 WebView(
-                  initialUrl: url,
+                  initialUrl: widget.website,
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated:(controller){
                     this.controller = controller;
