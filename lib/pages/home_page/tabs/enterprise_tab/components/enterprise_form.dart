@@ -65,7 +65,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
               )
           ),
 
-          myFormField(
+          FormField(
               context,
               "creator",
               const Icon(Icons.email, color: Colors.black54,),
@@ -73,7 +73,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
               1
           ),
 
-          myFormField(
+          FormField(
               context,
               "Tag",
               const Icon(Icons.email, color: Colors.black54,),
@@ -81,14 +81,14 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
               1
           ),
 
-          myFormField(
+          FormField(
               context,
               "Enterprise Name",
               const Icon(Icons.email, color: Colors.black54,),
               enterpriseNameController,
               1
           ),
-          myFormField(
+          FormField(
               context,
               "Enterprise Domain",
               const Icon(Icons.email, color: Colors.black54,),
@@ -98,7 +98,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
 
 
 
-          myFormField(
+          FormField(
               context,
               "Description",
               const Icon(Icons.email, color: Colors.black54,),
@@ -116,7 +116,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
         content: Container(
           child: Column(
             children: [
-              myFormField(
+              FormField(
                   context,
                   "Country",
                   const Icon(Icons.email, color: Colors.black54,),
@@ -124,7 +124,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                   1
               ),
 
-              myFormField(
+              FormField(
                   context,
                   "Town",
                   const Icon(Icons.email, color: Colors.black54,),
@@ -133,7 +133,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
               ),
 
 
-              myFormField(
+              FormField(
                   context,
                   "Address",
                   const Icon(Icons.email, color: Colors.black54,),
@@ -141,7 +141,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                   1
               ),
 
-              myFormField(
+              FormField(
                   context,
                   "Telephone",
                   const Icon(Icons.email, color: Colors.black54,),
@@ -162,7 +162,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                myFormField(
+                FormField(
                     context,
                     "Website",
                     const Icon(Icons.email, color: Colors.black54,),
@@ -170,7 +170,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                     1
                 ),
 
-                myFormField(
+                FormField(
                     context,
                     "open Hour",
                     const Icon(Icons.email, color: Colors.black54,),
@@ -178,7 +178,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                     1
                 ),
 
-                myFormField(
+                FormField(
                     context,
                     "closing Hour",
                     const Icon(Icons.email, color: Colors.black54,),
@@ -187,7 +187,7 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                 ),
 
 
-                myFormField(
+                FormField(
                     context,
                     "Email",
                     const Icon(Icons.email, color: Colors.black54,),

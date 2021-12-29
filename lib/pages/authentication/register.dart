@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
           child: Column(
             children: [
 
-              myFormField(
+              FormField(
                   context,
                   "Name",
                   const Icon(Icons.person, color: Colors.black54,),
@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
                  1
               ),
 
-              myFormField(
+              FormField(
                   context,
                   "Surname",
                   const Icon(Icons.person, color: Colors.black54,),
@@ -58,7 +58,7 @@ class _RegisterState extends State<Register> {
                 1
               ),
 
-              myFormField(
+              FormField(
                   context,
                   "Password",
                   const Icon(Icons.email, color: Colors.black54,),
@@ -69,7 +69,7 @@ class _RegisterState extends State<Register> {
                 children: [
 
                   Expanded(
-                    child: myFormField(
+                    child: FormField(
                         context,
                         "Date of Birth",
                         const Icon(Icons.calendar_today, color: Colors.black54,),
@@ -98,7 +98,7 @@ class _RegisterState extends State<Register> {
                 ],
               ),
 
-              myFormField(
+              FormField(
                   context,
                   "Country",
                   const Icon(Icons.password, color: Colors.black54,),
@@ -106,7 +106,7 @@ class _RegisterState extends State<Register> {
               ),
 
 
-              myFormField(
+              FormField(
                   context,
                   "Telephone",
                   const Icon(Icons.password, color: Colors.black54,),
@@ -115,7 +115,7 @@ class _RegisterState extends State<Register> {
 
 
 
-              myFormField(
+              FormField(
                   context,
                   "gender",
                   const Icon(Icons.email, color: Colors.black54,),

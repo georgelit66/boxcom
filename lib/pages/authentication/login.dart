@@ -46,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
 
             const SizedBox(height: 15,),
 
-            myFormField(
+            FormField(
                 context,
                 "Password",
                 const Icon(Icons.lock, color: Colors.black54,),
