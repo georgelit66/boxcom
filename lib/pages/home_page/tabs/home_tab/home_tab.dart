@@ -65,15 +65,12 @@ class _HomeTabState extends State<HomeTab> {
               height: 35.0,
               width: 35.0,
               decoration: BoxDecoration(
-
-
-
-               color: Theme.of(context).indicatorColor,
+               color: Colors.grey[300],
 
                   borderRadius: BorderRadius.circular(30.0)),
               child: Icon(returnCategories(context)[index].icon,
                   size: 25.0,
-                color: Theme.of(context).backgroundColor,
+                color: Colors.black54,
                   ),
             ),
             Text(
@@ -90,7 +87,6 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
 
-    final width = MediaQuery.of(context).size.width;
 
 
 

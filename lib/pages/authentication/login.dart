@@ -5,6 +5,7 @@ import 'package:boxcom/widgets/form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginForm extends StatefulWidget {
@@ -18,7 +19,7 @@ class _LoginFormState extends State<LoginForm> {
 
   void showInSnackBar(String value, context) {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value, style: TextStyle(color: Colors.white),)));
   }
 
   TextEditingController emailController = TextEditingController();
@@ -28,7 +29,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 15,),
@@ -42,17 +43,22 @@ class _LoginFormState extends State<LoginForm> {
 
             const SizedBox(height: 15,),
 
+            MyFormField(
+                controller: emailController,
+                hint: 'Email',
+                maxLines: 1,
+                icon:const Icon(Icons.email, color: Colors.black54,)
+            ),
 
 
             const SizedBox(height: 15,),
 
-            FormField(
-                context,
-                "Password",
-                const Icon(Icons.lock, color: Colors.black54,),
-                passwordController,
-              1
-            ),
+           MyFormField(
+             controller: passwordController,
+             hint: 'PassWord',
+             maxLines: 1,
+             icon:const Icon(Icons.lock,  color: Colors.black54,)
+             ),
 
 
             const SizedBox(height: 20,),
@@ -64,7 +70,8 @@ class _LoginFormState extends State<LoginForm> {
                   var email = emailController.value.text;
                   var password = passwordController.value.text;
 
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const MainHomePage()));
+                 print("$email, $password");
+                 Navigator.push(context, MaterialPageRoute(builder: (_) => const MainHomePage()));
 
 
                 } catch(e){
@@ -106,11 +113,10 @@ class _LoginFormState extends State<LoginForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
-                const Text(
-                  "Dont have an Account ?",
-                  style: TextStyle(
+               Text(
+                  AppLocalizations.of(context)!.dontHaveAnAccount,
+                  style: const TextStyle(
                     fontSize: 17,
-                    color: Colors.black54
                   ),
                 ),
 

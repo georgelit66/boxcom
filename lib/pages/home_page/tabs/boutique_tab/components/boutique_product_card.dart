@@ -29,37 +29,39 @@ Widget productCard(Product product){
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child:    Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product.name,
-                          style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.name,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 6.0,),
+                          const SizedBox(height: 6.0,),
 
-                        Text(
-                           "${product.price} CFA",
-                          style: const TextStyle(
-                              color: Colors.cyan,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700
+                          Text(
+                             "${product.price} CFA",
+                            style: const TextStyle(
+                                color: Colors.cyan,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700
+                            ),
                           ),
-                        ),
 
-                      ],
+                        ],
 
+                      ),
                     ),
 
 
@@ -102,7 +104,7 @@ Widget myProductCard(Product product) {
           children: [
             SizedBox(
               child:Builder(builder: (context)=> Image(
-               height: MediaQuery.of(context).size.width <= 800 ? 110: 250 ,
+               height: MediaQuery.of(context).size.width <= 800 ? 110: 250,
                image: AssetImage(
                 product.imgUrl[0],
                 ),
@@ -131,7 +133,6 @@ Widget myProductCard(Product product) {
                       Text(
                         product.name,
                         style: const TextStyle(
-                            color: Colors.black87,
                             fontSize: 16,
                             fontWeight: FontWeight.w700
                         ),
@@ -156,7 +157,6 @@ Widget myProductCard(Product product) {
                       onPressed: (){},
                       icon:  const Icon(
                         CupertinoIcons.delete,
-                        color: Colors.black54,
                         size: 18,
                       )
                   )

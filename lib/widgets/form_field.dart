@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FormField extends StatefulWidget {
-  const FormField({Key? key, required this.controller, required this.hint, required this.icon, required this.maxLines}) : super(key: key);
-
-  final TextEditingController controller;
+class MyFormField extends StatefulWidget {
+  const MyFormField({Key? key, required this.controller, required this.hint, required this.icon, required this.maxLines}) : super(key: key);
+  
   final String hint;
   final Icon icon;
+  final TextEditingController controller;
    final int maxLines;
 
   @override
-  _FormFieldState createState() => _FormFieldState();
+  _MyFormFieldState createState() => _MyFormFieldState();
 }
 
-class _FormFieldState extends State<FormField> {
+class _MyFormFieldState extends State<MyFormField> {
+
+  RegExp numReg = RegExp(r".*[0-9].*");
+  RegExp letterReg = RegExp(r".*[A-Za-z].*");
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,14 +36,15 @@ class _FormFieldState extends State<FormField> {
           ],
         ),
         child:  TextField(
+          style: const TextStyle(color: Colors.black54),
             maxLines: widget.maxLines,
             controller: widget.controller,
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 border: InputBorder.none,
-                fillColor: Colors.black54,
-                hintText: widget.hint,
                 hintStyle: const TextStyle(color: Colors.black54),
+                hintText: widget.hint,
+                hoverColor: Colors.black54,
                 prefixIcon:  SizedBox(
                     width: 50,
                     child: Align(

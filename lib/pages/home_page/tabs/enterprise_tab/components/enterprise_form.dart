@@ -53,58 +53,119 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
       content: Column(
         children: [
 
-
           InkWell(
-              onTap: getImage,
-              child:  CircleAvatar(
-                backgroundImage: const AssetImage(
-                    "assets/products/house4.png"
+            onTap: getImage,
+            child: Stack(
+              children: [
+                Container(
+                  width: 140,
+                  height: 140,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 4.0,
+                          color: Theme.of(context).backgroundColor
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: const Offset(0,10)
+                        )
+                      ],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(12),
+                  ),
+                  child:   _image != null ? FadeInImage(
+                    placeholder: const AssetImage(
+                        "assets/images/placeholder1.png"
+                    ),
+                    image:   FileImage(_image!),
+                    fit: BoxFit.cover,
+                  ): const FadeInImage(
+                      placeholder: AssetImage(
+                          "assets/images/placeholder1.png"
+                      ),
+                      image: AssetImage(
+                          "assets/images/placeholder1.png"
+                      ),
+                  ),
                 ),
-                foregroundImage: _image != null ? FileImage(_image!) : FileImage(File.fromUri(Uri.parse("ff"))),
-                radius: 70,
-              )
-          ),
-
-          FormField(
-              context,
-              "creator",
-              const Icon(Icons.email, color: Colors.black54,),
-              creatorController,
-              1
-          ),
-
-          FormField(
-              context,
-              "Tag",
-              const Icon(Icons.email, color: Colors.black54,),
-              tagController,
-              1
-          ),
-
-          FormField(
-              context,
-              "Enterprise Name",
-              const Icon(Icons.email, color: Colors.black54,),
-              enterpriseNameController,
-              1
-          ),
-          FormField(
-              context,
-              "Enterprise Domain",
-              const Icon(Icons.email, color: Colors.black54,),
-              domainController,
-              1
-          ),
 
 
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      height: 40,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4.0,
+                              color: Theme.of(context).backgroundColor
+                          ),
+                          color: Theme.of(context).primaryColor,
+                          shape: BoxShape.rectangle
+                      ),
 
-          FormField(
-              context,
-              "Description",
-              const Icon(Icons.email, color: Colors.black54,),
-              descriptionController,
-              4
+
+                      child: const Icon(
+                        Icons.linked_camera,
+                        color: Colors.white,
+                      ),
+                    )
+                )
+              ],
+            ),
           ),
+
+          const SizedBox(height: 20),
+
+
+          MyFormField(
+            controller:  creatorController,
+            hint: "Creator",
+            maxLines: 1,
+            icon: const Icon(Icons.person, color: Colors.black54,),
+          ),
+
+
+          MyFormField(
+            controller:tagController,
+            hint: "Tag",
+            maxLines: 1,
+            icon: const Icon(Icons.email, color: Colors.black54,),
+          ),
+
+
+
+          MyFormField(
+            controller: enterpriseNameController,
+            hint: "Boutique Name",
+            maxLines: 1,
+            icon: const Icon(Icons.email, color: Colors.black54,),
+          ),
+
+
+
+          MyFormField(
+            controller: domainController,
+            hint: "Boutique Domain",
+            maxLines: 1,
+            icon: const Icon(Icons.email, color: Colors.black54,),
+          ),
+
+
+
+
+          MyFormField(
+            controller:  descriptionController,
+            hint: "Boutique Domain",
+            maxLines: 4,
+            icon: const Icon(Icons.email, color: Colors.black54,),
+          ),
+
+
         ],
       ),
     ),
@@ -113,89 +174,99 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
         _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
         isActive: _activeStepIndex >= 1,
         title: const Text('Address'),
-        content: Container(
-          child: Column(
-            children: [
-              FormField(
-                  context,
-                  "Country",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  countryController,
-                  1
-              ),
-
-              FormField(
-                  context,
-                  "Town",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  townController,
-                  1
-              ),
+        content: Column(
+          children: [
+            MyFormField(
+              controller:  countryController,
+              hint: "Country",
+              maxLines: 1,
+              icon: const Icon(Icons.location_on, color: Colors.black54,),
+            ),
 
 
-              FormField(
-                  context,
-                  "Address",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  addressController,
-                  1
-              ),
-
-              FormField(
-                  context,
-                  "Telephone",
-                  const Icon(Icons.email, color: Colors.black54,),
-                  telephoneController,
-                  1
-              ),
 
 
-            ],
-          ),
+
+
+
+            MyFormField(
+              controller:  townController,
+              hint: "Town",
+              maxLines: 1,
+              icon: const Icon(Icons.location_on, color: Colors.black54,),
+            ),
+
+
+
+
+            MyFormField(
+              controller:  addressController,
+              hint: "Address",
+              maxLines: 1,
+              icon: const Icon(Icons.location_on, color: Colors.black54,),
+            ),
+
+
+
+
+            MyFormField(
+              controller: telephoneController,
+              hint: "Telephone",
+              maxLines: 1,
+              icon: const Icon(Icons.phone, color: Colors.black54,),
+            ),
+
+
+          ],
         )),
     Step(
         state: StepState.complete,
         isActive: _activeStepIndex >= 2,
-        title: const Text('Confirm'),
-        content: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                FormField(
-                    context,
-                    "Website",
-                    const Icon(Icons.email, color: Colors.black54,),
-                    websiteController,
-                    1
-                ),
-
-                FormField(
-                    context,
-                    "open Hour",
-                    const Icon(Icons.email, color: Colors.black54,),
-                    openHourController,
-                    1
-                ),
-
-                FormField(
-                    context,
-                    "closing Hour",
-                    const Icon(Icons.email, color: Colors.black54,),
-                    closingHourController,
-                    1
-                ),
+        title: const Text('Extra Info'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
 
 
-                FormField(
-                    context,
-                    "Email",
-                    const Icon(Icons.email, color: Colors.black54,),
-                    emailController,
-                    1
-                ),
-              ],
-            )))
+
+
+            MyFormField(
+              controller:  websiteController,
+              hint: "Website",
+              maxLines: 1,
+              icon: const Icon(Icons.language, color: Colors.black54,),
+            ),
+
+
+
+            MyFormField(
+              controller: openHourController,
+              hint: "Open Hour",
+              maxLines: 1,
+              icon: const Icon(Icons.email, color: Colors.black54,),
+            ),
+
+
+            MyFormField(
+              controller: closingHourController,
+              hint: "Closing Hour",
+              maxLines: 1,
+              icon: const Icon(Icons.email, color: Colors.black54,),
+            ),
+
+            MyFormField(
+              controller: emailController,
+              hint: "Email",
+              maxLines: 1,
+              icon: const Icon(Icons.email, color: Colors.black54,),
+            ),
+
+
+
+
+          ],
+        ))
   ];
 
 
@@ -204,9 +275,9 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: height * .6),
+        padding: EdgeInsets.only(top: height * .06),
         child: Stepper(
-          type: StepperType.vertical,
+          type: StepperType.horizontal,
           currentStep: _activeStepIndex,
           steps: stepList(),
           onStepContinue: () {
@@ -261,8 +332,16 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
 
                         child: Center(
                           child: (isLastStep)
-                              ? const Text('Create Enterprise')
-                              : const Text('Next'),
+                              ? const Text('Create Enterprise',style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
+                          ),)
+                              : const Text('Next',style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
+                          ),),
                         ),
                       ),
                     )
@@ -297,7 +376,11 @@ class _EnterpriseFormState extends State<EnterpriseForm> {
                           ),
 
                           child: const Center(
-                            child :Text('Back'),
+                            child :Text('Back',style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),),
                           ),
                         ),
                       )

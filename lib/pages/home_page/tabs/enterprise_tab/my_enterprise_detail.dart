@@ -1,12 +1,15 @@
+import 'package:boxcom/data/enterprises.dart';
 import 'package:boxcom/data/posts.dart';
+import 'package:boxcom/data/users.dart';
 import 'package:boxcom/models/enterprise_model.dart';
+import 'package:boxcom/pages/home_page/tabs/boutique_tab/components/my_boutique_partners.dart';
 import 'package:boxcom/pages/home_page/tabs/enterprise_tab/enterprise_edit.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_view_home.dart';
-import 'package:boxcom/widgets/post_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'components/new_postt.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'components/my_enterprise_partners.dart';
+import 'components/new_enterprise_post.dart';
 
 class MyEnterpriseDetail extends StatefulWidget {
   const MyEnterpriseDetail({Key? key, required this.enterprise}) : super(key: key);
@@ -22,11 +25,11 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
     return Scaffold(
 
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          elevation: 10,
           leading: IconButton(
             icon: const Icon(
                 Icons.arrow_back,
-                color: Colors.black
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -38,7 +41,6 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
             IconButton(
               icon: const Icon(
                   Icons.more_vert,
-                  color: Colors.black
               ),
               onPressed: () {
               },
@@ -49,7 +51,6 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
           title: Text(
             widget.enterprise.name,
             style: const TextStyle(
-                color: Colors.black54
             ),
           ),
           centerTitle: true,
@@ -78,16 +79,14 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                         Text(
                           widget.enterprise.name,
                           style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600
                           ),
                         ),
                         const SizedBox(height: 5.0,),
                         Text(
                           widget.enterprise.enterpriseSector,
                           style: const TextStyle(
-                              color: Colors.black38,
                               fontSize: 14
                           ),
                         ),
@@ -113,14 +112,12 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                             children:  [
                               const Icon(
                                 Icons.location_on,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(width: 5.0,),
                               Text(
                                 widget.enterprise.ville,
                                 style: const TextStyle(
-                                    color: Colors.black54,
                                     fontSize: 16
                                 ),
                               ),
@@ -133,14 +130,12 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                             children:  [
                               const Icon(
                                 Icons.phone,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(width: 5.0,),
                               Text(
                                 widget.enterprise.telephone,
                                 style: const TextStyle(
-                                    color: Colors.black54,
                                     fontSize: 16
                                 ),
                               ),
@@ -152,14 +147,12 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                             children:  [
                               const Icon(
                                 Icons.calendar_today_outlined,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(width: 8.0,),
                               Text(
                                 "${widget.enterprise.openHour} - ${widget.enterprise.closingHour}",
                                 style: const TextStyle(
-                                    color: Colors.black54,
                                     fontSize: 16
                                 ),
                               ),
@@ -172,7 +165,6 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                             children:  [
                               const Icon(
                                 Icons.language_outlined,
-                                color: Colors.black45,
                                 size: 20,
                               ),
                               const SizedBox(width: 8.0,),
@@ -188,84 +180,93 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                         ],
                       ),
 
-                      Wrap(
+                      Row(
                         children: [
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> EnterpriseEdit(enterprise: widget.enterprise)));
-                          },
-                          child:   Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Colors.greenAccent,
-                                      Colors.green
-                                    ]
+                          Wrap(
+                            children: [
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> EnterpriseEdit(enterprise: widget.enterprise)));
+                              },
+                              child:   Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    gradient:LinearGradient(
+                                        colors: [
+                                          Colors.cyanAccent,
+                                          Theme.of(context).primaryColor
+                                        ]
+                                    ),
+                                  ),
+                                  child:  Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                      child: Row(
+                                        children: [
+
+                                          const Icon(
+                                            Icons.edit,
+                                            size: 17,
+                                            color: Colors.white,
+                                          ),
+
+                                          const SizedBox(width: 5.0,),
+                                          Text(
+                                            AppLocalizations.of(context)!.edit,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                  )
+                              ),
+                            ),
+
+                              const SizedBox(width: 5.0,),
+
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const NewEnterprisePost()));
+                                },
+                                child:   Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      gradient:LinearGradient(
+                                          colors: [
+                                           Colors.cyanAccent,
+                                            Theme.of(context).primaryColor
+                                          ]
+                                      ),
+                                    ),
+                                    child:  Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                        child: Row(
+                                          children:[
+
+                                            const Icon(
+                                              Icons.add,
+                                              size: 17,
+                                              color: Colors.white,
+                                            ),
+
+                                            const SizedBox(width: 5.0,),
+                                            Text(
+                                           AppLocalizations.of(context)!.post,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                    )
                                 ),
                               ),
-                              child:  Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                  child: Row(
-                                    children: const [
 
-                                      Icon(
-                                        Icons.edit,
-                                        size: 17,
-                                        color: Colors.white,
-                                      ),
 
-                                      SizedBox(width: 5.0,),
-                                      Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                            color: Colors.white
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                              )
-                          ),
-                        ),
-
-                          const SizedBox(width: 15.0,),
-
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> NewPost()));
-                            },
-                            child:   Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.greenAccent,
-                                        Colors.green
-                                      ]
-                                  ),
-                                ),
-                                child:  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                    child: Row(
-                                      children: const [
-
-                                        Icon(
-                                          Icons.add,
-                                          size: 17,
-                                          color: Colors.white,
-                                        ),
-
-                                        SizedBox(width: 5.0,),
-                                        Text(
-                                          "post",
-                                          style: TextStyle(
-                                              color: Colors.white
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                )
-                            ),
+                            ],
                           ),
 
 
@@ -281,7 +282,6 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                 child:  Text(
                   widget.enterprise.description,
                   style: const TextStyle(
-                      color: Colors.black54,
                       fontSize: 16,
                       fontWeight: FontWeight.w600
                   ),
@@ -301,23 +301,23 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
 
                     InkWell(
                       onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> const MyBoutiquePartners()));
 
                       },
                       child:  Container(
-                        padding: const EdgeInsets.all(4),
+                        padding:  const EdgeInsets.all(4),
                         child: Column(
-                          children:  const [
-                            Text("23",
-                              style: TextStyle(
+                          children:   [
+                             Text(
+                              users.length.toString(),
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87
                               ),),
-                            SizedBox(height: 3.0,),
+                            const SizedBox(height: 3.0,),
                             Text(
-                              "followers",
-                              style: TextStyle(
-                                  color: Colors.black54,
+                              AppLocalizations.of(context)!.members,
+                              style: const TextStyle(
                                   fontSize: 16
                               ),
                             )
@@ -328,23 +328,24 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
 
                     InkWell(
                       onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> const MyEnterprisePartners()));
                        },
                       child:
                       Container(
                         padding: const EdgeInsets.all(4),
                         child: Column(
-                          children:  const [
-                            Text("43",
-                              style: TextStyle(
+                          children: [
+                             Text(
+                                enterprises.length.toString(),
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87
-                              ),),
-                            SizedBox(height: 3.0,),
+                              )
+                            ),
+                            const SizedBox(height: 3.0,),
                             Text(
-                              "partners",
-                              style: TextStyle(
-                                  color: Colors.black54,
+                              AppLocalizations.of(context)!.partners,
+                              style: const TextStyle(
                                   fontSize: 16
                               ),
                             )
@@ -359,13 +360,11 @@ class _MyEnterpriseDetailState extends State<MyEnterpriseDetail> {
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black87
                           ),),
                         SizedBox(height: 3.0,),
                         Text(
                           "posts",
                           style: TextStyle(
-                              color: Colors.black54,
                               fontSize: 16
                           ),
                         )

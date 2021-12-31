@@ -1,6 +1,9 @@
 import 'package:boxcom/pages/account/my_account.dart';
+import 'package:boxcom/pages/authentication/login.dart';
 import 'package:boxcom/pages/favourites/favourites_page.dart';
+import 'package:boxcom/widgets/help_center_page.dart';
 import 'package:boxcom/widgets/settings_screen.dart';
+import 'package:boxcom/widgets/stored_files.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,42 +51,14 @@ class _AppDrawerState extends State<AppDrawer> {
                             shape: BoxShape.circle,
                             image: const DecorationImage(
                                 image: AssetImage(
-                                    'assets/images/stmarksbasilica.jpg'
+                                    'assets/images/person.jpg'
                                 ),
                                 fit: BoxFit.cover
                             )
                         ),
                       ),
 
-
-                      Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            height: 40.0,
-                            width: 40.0,
-                            decoration:BoxDecoration(
-                                border: Border.all(
-                                    width: 4.0,
-                                    color: Theme.of(context).backgroundColor
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                      spreadRadius: 2,
-                                      blurRadius: 10,
-                                      color: Colors.black.withOpacity(0.1),
-                                      offset: const Offset(0,10)
-                                  )
-                                ],
-                                color: Theme.of(context).primaryColor,
-                                shape: BoxShape.circle
-                            ),
-                            child: const Icon(
-                              Icons.enhance_photo_translate_outlined,
-                              color: Colors.white,
-                            ),
-                          )
-                      )
+                      
                     ],
                   )
               ),
@@ -135,7 +110,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
             InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyAccount()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const StoredFiles()));
               },
               child: ListTile(
                   leading: const Icon(
@@ -156,7 +131,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
             InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyAccount()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const HelpCenter()));
               },
               child: ListTile(
                 leading: const Icon(
@@ -200,18 +175,22 @@ class _AppDrawerState extends State<AppDrawer> {
 
             const SizedBox(height: 5.0,),
 
-            ListTile(
-              leading: const Icon(
-                CupertinoIcons.nosign,
-                color: Colors.cyan,
-              ),
-              title: Text(
-                AppLocalizations.of(context)!.logout,
-                style: const TextStyle(
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> const LoginForm()));
+              },
+              child: ListTile(
+                leading: const Icon(
+                  CupertinoIcons.nosign,
+                  color: Colors.cyan,
                 ),
+                title: Text(
+                  AppLocalizations.of(context)!.logout,
+                  style: const TextStyle(
+                  ),
+                ),
+                trailing: const Icon(CupertinoIcons.forward),
               ),
-              trailing: const Icon(CupertinoIcons.forward),
-
             ),
 
 

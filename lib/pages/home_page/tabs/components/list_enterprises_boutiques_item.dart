@@ -2,12 +2,14 @@ import 'package:boxcom/models/boutique_model.dart';
 import 'package:boxcom/models/enterprise_model.dart';
 import 'package:boxcom/pages/home_page/tabs/boutique_tab/boutique_detail.dart';
 import 'package:boxcom/pages/home_page/tabs/boutique_tab/my_boutique_detail.dart';
+import 'package:boxcom/pages/home_page/tabs/components/post_menu.dart';
 import 'package:boxcom/pages/home_page/tabs/enterprise_tab/my_enterprise_detail.dart';
 import 'package:boxcom/pages/home_page/tabs/enterprise_tab/enterprise_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EnterpriseTile extends StatefulWidget {
   const EnterpriseTile({Key? key, required this.enterprise}) : super(key: key);
@@ -54,11 +56,12 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                 Padding(
                   padding: const EdgeInsets.only(right: 15, bottom: 2),
                   child:    Text(
-                    '${4} followers',
-                    style: GoogleFonts.lato(
+                    '${4}  ${(AppLocalizations.of(context)!.subscribers)}',
+                    style: const TextStyle(
                         letterSpacing: 0.5,
                         fontSize: 13,
-                        fontWeight: FontWeight.normal),
+                        fontWeight: FontWeight.normal
+                    ),
                   ),
                 ),
 
@@ -69,6 +72,10 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                       setState(() {
                         _isFollowing = !_isFollowing;
                       });
+                      showInSnackBar(
+                          _isFollowing ?  "${(AppLocalizations.of(context)!.youSubscribedTo)} ${ widget.enterprise.name}": "${(AppLocalizations.of(context)!.youUnSubscribedFrom)}${ widget.enterprise.name}",
+                          context
+                      );
 
                     },
                     child: !_isFollowing ? Container(
@@ -77,17 +84,18 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                             borderRadius: BorderRadius.circular(10.0),
                           gradient:  LinearGradient(
                               colors: [
-                                Theme.of(context).indicatorColor,
+                               Colors.cyanAccent,
                                 Theme.of(context).primaryColor
                               ]
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                           child:  Text(
-                            "Follow",
-                            style: TextStyle(
-                                color: Colors.white
+                            (AppLocalizations.of(context)!.subscribe),
+                            style: const TextStyle(
+                                color: Colors.white,
+                               fontWeight: FontWeight.w600
                             ),
                           ),
                         )
@@ -97,11 +105,11 @@ class _EnterpriseTileState extends State<EnterpriseTile> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.black26
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        child:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                           child:  Text(
-                            "Unfollow",
-                            style: TextStyle(
+                            (AppLocalizations.of(context)!.unsubscribe),
+                            style: const TextStyle(
                                 color: Colors.white
                             ),
                           ),
@@ -146,8 +154,8 @@ Widget myEnterpriseTile(Enterprise enterprise, BuildContext context){
           subtitle: Text(enterprise.enterpriseSector),
           trailing: Text(
             32 > 1000 ?
-            "${5 * 0.001.toDouble()}k followers"
-                :3.toString() + " followers",
+            "${5 * 0.001.toDouble()}k ${(AppLocalizations.of(context)!.subscribers)}"
+                :3.toString() + " " + (AppLocalizations.of(context)!.subscribers),
             style: const TextStyle(
                 fontSize: 14
             ),
@@ -158,82 +166,121 @@ Widget myEnterpriseTile(Enterprise enterprise, BuildContext context){
 }
 
 
+class BoutiqueTile extends StatefulWidget {
+  const BoutiqueTile({Key? key, required this.boutique}) : super(key: key);
+  final Boutique boutique;
 
-Widget boutiqueTile(Boutique boutique, BuildContext context){
-  return  Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    child: GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueDetail(boutique: boutique,)));
-      },
-      child:  ListTile(
-          leading: GestureDetector(
+  @override
+  _BoutiqueTileState createState() => _BoutiqueTileState();
+}
+
+class _BoutiqueTileState extends State<BoutiqueTile> {
+
+  var _isFollowing = true;
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueDetail(boutique: boutique,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueDetail(boutique: widget.boutique,)));
             },
-            child:  CircleAvatar(
-              backgroundImage: const AssetImage(
-                 "assets/images/placeholder1.png"
-              ),
-              foregroundImage:AssetImage(
-                  boutique.imgUrl
-              ),
-              radius: 30,
-            ),
-          ),
-          contentPadding: const EdgeInsets.all(0),
-          title: Text(boutique.name),
-          subtitle: Text(boutique.boutique_sector),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              Padding(
-                padding: const EdgeInsets.only(right: 15, bottom: 2),
-                child:    Text(
-                  '${boutique.followers} followers',
-                  style: GoogleFonts.lato(
-                      letterSpacing: 0.5,
-                      fontSize: 13,
-                      fontWeight: FontWeight.normal),
-                ),
-              ),
-
-
-              GestureDetector(
+            child:  ListTile(
+                leading: GestureDetector(
                   onTap: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> BoutiqueDetail(boutique: widget.boutique,)));
                   },
-                  child: Container(
-                 
-                    decoration: BoxDecoration(
-                        gradient:  LinearGradient(
-                            colors: [
-                              Theme.of(context).indicatorColor,
-                              Theme.of(context).primaryColor
-                            ]
-                        ),
-                      borderRadius: BorderRadius.circular(10.0)
+                  child:  CircleAvatar(
+                    backgroundImage: const AssetImage(
+                        "assets/images/placeholder1.png"
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      child:  Text(
-                        "Follow",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700
+                    foregroundImage:AssetImage(
+                        widget.boutique.imgUrl
+                    ),
+                    radius: 30,
+                  ),
+                ),
+                contentPadding: const EdgeInsets.all(0),
+                title: Text(widget.boutique.name),
+                subtitle: Text(widget.boutique.boutique_sector),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15, bottom: 2),
+                      child:    Text(
+                        '${widget.boutique.followers} ${(AppLocalizations.of(context)!.subscribers)}',
+                        style: const TextStyle(
+                            letterSpacing: 0.5,
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal
                         ),
                       ),
                     ),
-                  )
-              ),
-            ],
-          )
-      )
-    )
-  );
+
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15.0),
+                      child: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            _isFollowing = !_isFollowing;
+                          });
+                          showInSnackBar(
+                              _isFollowing ?  "${(AppLocalizations.of(context)!.youSubscribedTo)} ${ widget.boutique.name}": "${(AppLocalizations.of(context)!.youUnSubscribedFrom)} ${ widget.boutique.name}",
+                              context
+                          );
+
+                        },
+                        child: !_isFollowing ? Container(
+
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              gradient:  LinearGradient(
+                                  colors: [
+                                    Colors.cyanAccent,
+                                    Theme.of(context).primaryColor
+                                  ]
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child:  Text(
+                                (AppLocalizations.of(context)!.subscribe),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600
+                                ),
+                              ),
+                            )
+                        ): Container(
+
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.black26
+                            ),
+                            child:  Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              child:  Text(
+                                (AppLocalizations.of(context)!.unsubscribe),
+                                style: const TextStyle(
+                                    color: Colors.white
+                                ),
+                              ),
+                            )
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+            )
+        )
+    );
+  }
 }
+
+
 
 
 
@@ -265,8 +312,8 @@ Widget myBoutiqueTile(Boutique boutique, BuildContext context){
           trailing:
           Text(
             boutique.followers > 1000 ?
-            "${boutique.followers * 0.001.toDouble()}k followers"
-                :boutique.followers.toString() + " followers",
+            "${boutique.followers * 0.001.toDouble()}k  ${(AppLocalizations.of(context)!.subscribers)}"
+                :boutique.followers.toString() + " " + ( AppLocalizations.of(context)!.subscribers),
             style: const TextStyle(
                 fontSize: 14
             ),

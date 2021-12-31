@@ -1,4 +1,5 @@
 import 'package:boxcom/models/enterprise_model.dart';
+import 'package:boxcom/pages/home_page/tabs/components/post_menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../enterprise_tab/enterprise_detail.dart';
@@ -93,14 +94,12 @@ class _EnterpriseCardState extends State<EnterpriseCard> {
                   setState(() {
                     _isSubscribed = !_isSubscribed;
                   });
-
-                  final snackBar = SnackBar(
-                      content: Text(
-                        _isSubscribed ?  "you followed ${ widget.enterprise.name}": "you are unfollowing ${ widget.enterprise.name}",
-                      )
+                  showInSnackBar(
+                    _isSubscribed ?  "${AppLocalizations.of(context)!.youSubscribedTo} ${ widget.enterprise.name}": "${AppLocalizations.of(context)!.youUnSubscribedFrom} ${ widget.enterprise.name}",
+                    context
                   );
 
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                 },
                 child: !_isSubscribed ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),

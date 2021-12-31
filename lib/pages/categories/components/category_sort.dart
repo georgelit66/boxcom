@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 Widget CategorySort(){
   return PopupMenuButton(
-      icon: const Icon(Icons.filter_list, color: Colors.black54,),
+      icon: const Icon(Icons.filter_list),
 
       itemBuilder: (_) =>[
 

@@ -50,9 +50,12 @@ class ThemeNotifier extends ChangeNotifier {
 
   ThemeData light = ThemeData(
     backgroundColor: lightBG,
-    indicatorColor:darkIcon,
     primarySwatch:  Colors.cyan,
     scaffoldBackgroundColor: lightBG,
+    bottomAppBarColor: Colors.white,
+    indicatorColor: Colors.cyan,
+    focusColor: Colors.black54,
+    highlightColor: Colors.black54,
     appBarTheme: AppBarTheme(
       elevation: 0,
       textTheme: lightTextTheme
@@ -64,8 +67,11 @@ class ThemeNotifier extends ChangeNotifier {
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
     accentColor: darkAccent,
-    indicatorColor: darkIcon,
+    indicatorColor: Colors.cyan,
+    focusColor: Colors.black54,
     scaffoldBackgroundColor: darkBG,
+    bottomAppBarColor: Colors.black54,
+    highlightColor: Colors.white,
     appBarTheme: AppBarTheme(
       elevation: 0,
       textTheme: darkTextTheme

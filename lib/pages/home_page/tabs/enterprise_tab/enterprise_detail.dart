@@ -1,9 +1,14 @@
+import 'package:boxcom/data/enterprises.dart';
+import 'package:boxcom/data/users.dart';
 import 'package:boxcom/models/enterprise_model.dart';
 import 'package:boxcom/pages/home_page/tabs/components/web_view.dart';
 import 'package:boxcom/pages/home_page/tabs/home_tab/components/post_view_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'components/enterprise_followers.dart';
+import 'components/enterprise_partners.dart';
 
 class EnterpriseDetail extends StatefulWidget {
   const EnterpriseDetail({Key? key, required this.enterprise})
@@ -32,7 +37,9 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
         body: CustomScrollView(controller: _trackingScrollController, slivers: [
           SliverAppBar(
             pinned: true,
-         
+            elevation: 10,
+            backgroundColor: Theme.of(context).bottomAppBarColor,
+
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
@@ -53,6 +60,8 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
           ),
           SliverToBoxAdapter(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -72,8 +81,8 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                         Text(
                           widget.enterprise.name,
                           style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
                           height: 5.0,
@@ -183,6 +192,8 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                           ),
                         ],
                       ),
+
+
                       Wrap(
                         children: [
                           InkWell(
@@ -198,16 +209,16 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
                                       gradient: LinearGradient(colors: [
-                                        Theme.of(context).indicatorColor,
+                                        Colors.cyanAccent,
                                         Theme.of(context).primaryColor
                                       ]),
                                     ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 15, vertical: 10),
                                       child: Text(
-                                        "Follow",
-                                        style: TextStyle(color: Colors.white),
+                                        AppLocalizations.of(context)!.subscribe,
+                                        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                                       ),
                                     ))
                                 : Container(
@@ -218,12 +229,12 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                         Colors.grey
                                       ]),
                                     ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(
+                                    child:  Padding(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 15, vertical: 10),
                                       child: Text(
-                                        "Unfollow",
-                                        style: TextStyle(color: Colors.white),
+                                        AppLocalizations.of(context)!.unsubscribe,
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     )),
                           ),
@@ -256,25 +267,26 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                   children: [
                     InkWell(
                       onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> const EnterpriseFollowers()));
 
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         child: Column(
-                          children: const [
-                            Text(
-                            "0",
-                              style: TextStyle(
+                          children:  [
+                             Text(
+                            users.length.toString(),
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 3.0,
                             ),
                             Text(
-                              "followers",
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.members,
+                              style: const TextStyle(
                                  fontSize: 16),
                             )
                           ],
@@ -283,25 +295,25 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                     ),
                     InkWell(
                       onTap: () {
-
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> const EnterprisePartners()));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         child: Column(
-                          children: const [
-                            Text(
-                              "4",
-                              style: TextStyle(
+                          children: [
+                             Text(
+                             enterprises.length.toString(),
+                              style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 3.0,
                             ),
                             Text(
-                              "partners",
-                              style: TextStyle(
+                                AppLocalizations.of(context)!.partners,
+                              style: const TextStyle(
                                  fontSize: 16),
                             )
                           ],

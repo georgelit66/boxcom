@@ -2,7 +2,7 @@
   "language": "Francais",
   "helloWorld": "Salut Monde",
   "hello": "{username} monde",
-  "appName": "Boxcom ",
+  "appName": "Boxcom",
 
   "homeTab" : "Accuile",
   "enterpriseTab": "Enterprise",
@@ -46,11 +46,51 @@
   "maskPost": "Masque la publication",
   "saveProduct": "Enregistrer le produit",
   "savePost": "Enregistrer la publication",
+  "articles": "articles",
+  "products": "produits",
+  "comments": "Commentaires",
+
+  "save": "Sauvegarder",
+  "cancel": "Annuler",
+  "addToFavourite": "Ajouter aux favoris",
+
+  "addedToFavouriteSuccess": "Ajouté aux favoris avec succès!",
+
+  "dontHaveAnAccount": "Vous n'avez pas de compte ?",
+
+  "aboutApplication": "À propos de l'application",
+
+  "articleDescription" : "Description d'article",
+
+  "youUnSubscribedFrom": "Vous vous êtes désabonné de",
+  "productTitle": "Titre du produit",
+  "productPrice": "Prix du produit",
+
+  "alreadyHaveAccount": "Vous avez déjà un compte ?",
+  "productDescription": "Description du produit",
+  "productCategory": "Catégorie de produit",
+  "productSubCategory": "Sous-catégorie",
+  "publishArticle": "Publier l'article",
+  "partners": "Partenaires",
+  "members": "Membres",
+
+  "boutiquePartners": "Boutiques partenaires",
+  "boutiqueMembers": "Membres de la boutique",
+  "enterprisePartners": "Partenaires d'entreprise",
+  "enterpriseMembers": "Membres de l'entreprise",
+
+  "subscribers": "Abonnés",
+
+
+  "youSubscribedTo": "Vous vous êtes abonné à",
 
 
   "retail": "Vente",
   "beauty": "Beaute",
   "technology": "Technologie",
   "construction": "Construction",
-  "transport": "Transport"
+  "transport": "Transport",
+  "newPost": "Nouvel article",
+  "edit": "Éditer",
+  "post": "Poster"
 }

@@ -1,10 +1,12 @@
-import 'package:boxcom/data/enterprises.dart';
+import 'package:boxcom/data/boutiques.dart';
+import 'package:boxcom/data/users.dart';
 import 'package:boxcom/models/boutique_model.dart';
+import 'package:boxcom/pages/home_page/tabs/boutique_tab/components/boutique_partners.dart';
 import 'package:boxcom/pages/home_page/tabs/boutique_tab/components/boutique_product_card.dart';
-import 'package:boxcom/pages/home_page/tabs/components/list_followers.dart';
-import 'package:boxcom/pages/home_page/tabs/components/list_partners.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'components/boutique_followers.dart';
 
 class BoutiqueDetail extends StatefulWidget {
   const BoutiqueDetail({Key? key, required this.boutique}) : super(key: key);
@@ -16,6 +18,9 @@ class BoutiqueDetail extends StatefulWidget {
 
 class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
+
+
+  var _isSubscribed = false;
 
   final TrackingScrollController _trackingScrollController =
   TrackingScrollController();
@@ -35,12 +40,11 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
                   SliverAppBar(
                     pinned: true,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).bottomAppBarColor,
                     centerTitle: true,
                     title: Text(
                       widget.boutique.name,
                       style: const TextStyle(
-                          color: Colors.black54,
                           fontSize: 20,
                           fontWeight: FontWeight.w700
                       ),
@@ -48,7 +52,6 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                     leading: IconButton(
                       icon: const Icon(
                           Icons.arrow_back,
-                          color: Colors.black
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -60,7 +63,6 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                       IconButton(
                         icon: const Icon(
                             Icons.more_vert,
-                            color: Colors.black
                         ),
                         onPressed: () {
                         },
@@ -70,6 +72,7 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
                   SliverToBoxAdapter(
                     child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
 
@@ -94,16 +97,14 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                             Text(
                               widget.boutique.name,
                               style: const TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600
                               ),
                             ),
                             const SizedBox(height: 5.0,),
                             Text(
                               widget.boutique.boutique_sector,
                               style: const TextStyle(
-                                  color: Colors.black38,
                                   fontSize: 14
                               ),
                             ),
@@ -118,7 +119,8 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
 
                           ],
-                        )
+                        ),
+
                       ],
                     ),
                   ),
@@ -136,14 +138,12 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                       children:  [
                         const Icon(
                           Icons.location_on,
-                          color: Colors.black45,
                           size: 20,
                         ),
                         const SizedBox(width: 5.0,),
                         Text(
                           widget.boutique.address,
                           style: const TextStyle(
-                              color: Colors.black54,
                               fontSize: 16
                           ),
                         ),
@@ -156,14 +156,12 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                       children:  [
                         const Icon(
                           Icons.phone,
-                          color: Colors.black45,
                           size: 20,
                         ),
                         const SizedBox(width: 5.0,),
                         Text(
                           widget.boutique.telephone,
                           style: const TextStyle(
-                              color: Colors.black54,
                               fontSize: 16
                           ),
                         ),
@@ -175,14 +173,12 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                       children:  const [
                         Icon(
                           Icons.calendar_today_outlined,
-                          color: Colors.black45,
                           size: 20,
                         ),
                         SizedBox(width: 8.0,),
                         Text(
                           "${"8:00"} - ${"18:00"}",
                           style: TextStyle(
-                              color: Colors.black54,
                               fontSize: 16
                           ),
                         ),
@@ -197,25 +193,48 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
                 Wrap(
                   children: [
-                    Container(
-                        decoration: BoxDecoration(
+
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isSubscribed = !_isSubscribed;
+                        });
+
+
+                      },
+                      child: _isSubscribed
+                          ? Container(
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
-                          gradient:  LinearGradient(
-                              colors: [
-                                Theme.of(context).primaryColor,
-                                Theme.of(context).indicatorColor
-                              ]
+                            gradient: LinearGradient(colors: [
+                             Colors.cyanAccent,
+                              Theme.of(context).primaryColor
+                            ]),
                           ),
-                        ),
-                        child:  const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                          child:Text(
-                            "Follow",
-                            style: TextStyle(
-                                color: Colors.white
+                          child:  Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            child: Text(
+                              AppLocalizations.of(context)!.subscribe,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),
                             ),
+                          ))
+                          : Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            gradient: const LinearGradient(colors: [
+                              Colors.black26,
+                              Colors.grey
+                            ]),
                           ),
-                        )
+                          child:  Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            child: Text(
+                              AppLocalizations.of(context)!.unsubscribe,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          )),
                     ),
                     const SizedBox(width: 15.0,),
 
@@ -235,7 +254,6 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
           child:  Text(
             widget.boutique.description,
             style: const TextStyle(
-                color: Colors.black54,
                 fontSize: 16,
                 fontWeight: FontWeight.w400
             ),
@@ -255,23 +273,22 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
               InkWell(
                 onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> const BoutiqueFollowers()));
 
                 },
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   child: Column(
                     children:  [
-                      Text(widget.boutique.followers.toString(),
+                      Text(users.length.toString(),
                         style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87
                         ),),
                       const SizedBox(height: 3.0,),
-                      const Text(
-                        "followers",
-                        style: TextStyle(
-                            color: Colors.black54,
+                      Text(
+                        AppLocalizations.of(context)!.members,
+                        style: const TextStyle(
                             fontSize: 16
                         ),
                       )
@@ -283,6 +300,8 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
               InkWell(
                 onTap:(){
 
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> const BoutiquePartners()));
+
                 },
                 child:
                 Container(
@@ -293,13 +312,12 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
                         style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87
-                        ),),
+                        )
+                      ),
                       const SizedBox(height: 3.0,),
-                      const Text(
-                        "partners",
-                        style: TextStyle(
-                            color: Colors.black54,
+                      Text(
+                        AppLocalizations.of(context)!.partners,
+                        style: const TextStyle(
                             fontSize: 16
                         ),
                       )
@@ -310,17 +328,16 @@ class _BoutiqueDetailState extends State<BoutiqueDetail> {
 
               Column(
                 children:  [
-                  Text(widget.boutique.products.length.toString(),
+                  Text( boutiques.length.toString(),
                     style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87
-                    ),),
+                    )
+                  ),
                   const SizedBox(height: 3.0,),
-                  const Text(
-                    "products",
-                    style: TextStyle(
-                        color: Colors.black54,
+                  Text(
+                    AppLocalizations.of(context)!.products,
+                    style: const TextStyle(
                         fontSize: 16
                     ),
                   )

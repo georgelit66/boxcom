@@ -1,8 +1,7 @@
 import 'package:boxcom/models/category_model.dart';
-import 'package:boxcom/pages/categories/components/category_item_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/category_sort.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -27,13 +26,12 @@ class _CategoryPageState extends State<CategoryPage> {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black54,
           ),
         ),
-        backgroundColor: Colors.white,
-        title: const TextField(
+        backgroundColor: Theme.of(context).bottomAppBarColor,
+        title: TextField(
           decoration: InputDecoration.collapsed(
-            hintText: 'Search ...',
+            hintText:"${AppLocalizations.of(context)!.search}...",
           ),
 
         ),

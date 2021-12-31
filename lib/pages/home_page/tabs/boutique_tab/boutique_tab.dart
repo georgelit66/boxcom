@@ -62,7 +62,7 @@ var _selectedIndex = 0;
 
                         const SizedBox(width: 5.0,),
 
-                        BoutiqueSort()
+                        const BoutiqueSort()
 
                       ],
                     )
@@ -95,7 +95,7 @@ var _selectedIndex = 0;
                                   gradient:  _selectedIndex == 0 ?
                                   LinearGradient(
                                       colors: [
-                                        Theme.of(context).indicatorColor,
+                                        Colors.cyanAccent,
                                         Theme.of(context).primaryColor
                                       ]
                                   ):const LinearGradient(
@@ -175,7 +175,7 @@ var _selectedIndex = 0;
                   var boutique =boutiqueProvider[index];
                   return Column(
                     children: [
-                      boutiqueTile(boutique, context),
+                      BoutiqueTile(boutique: boutique),
                       const SizedBox(height: 5),
                     ],
                   );

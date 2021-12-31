@@ -1,6 +1,8 @@
 import 'package:boxcom/models/boutique_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BoutiqueEdit extends StatefulWidget {
   const BoutiqueEdit({Key? key, required this.boutique}) : super(key: key);
@@ -16,12 +18,11 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         centerTitle: true,
         title: Text(
           widget.boutique.name,
           style: const TextStyle(
-              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.w700
           ),
@@ -29,7 +30,6 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
         leading: IconButton(
           icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -45,15 +45,6 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
         ),
         child: ListView(
           children: [
-            const Text(
-              "Edit Profile",
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700
-              ),
-            ),
-
-            const SizedBox(height: 15.0,),
 
 
             Center(
@@ -158,7 +149,6 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
                 labelText: "Boutique description",
                 hintText: widget.boutique.boutique_sector,
                 helperStyle:  const TextStyle(
-                    color: Colors.black,
                     fontWeight: FontWeight.w600
                 ),
               ),
@@ -181,13 +171,12 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                       decoration: BoxDecoration(
-                          border: Border.all(color:  Theme.of(context).primaryColor),
+                          border: Border.all(color:  Theme.of(context).primaryColor, width: 2),
                           borderRadius: BorderRadius.circular(15.0)
                       ),
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(
-                            color: Colors.black87,
+                      child:Text(
+                        AppLocalizations.of(context)!.cancel,
+                        style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600
                         ),
@@ -206,9 +195,9 @@ class _BoutiqueEditState extends State<BoutiqueEdit> {
                           color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(15.0)
                       ),
-                      child: const Text(
-                        "Save",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context)!.save,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600

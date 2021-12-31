@@ -25,13 +25,13 @@ class _WebViewPageState extends State<WebViewPage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         leading: IconButton(
           onPressed: (){
             Navigator.pop(context);
           },
           icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black
           ),
         ),
 
@@ -41,7 +41,6 @@ class _WebViewPageState extends State<WebViewPage> {
               onPressed:()=>controller.reload(),
               icon: const Icon(
                   Icons.refresh,
-                  color: Colors.black54,
               )
           )
         ],

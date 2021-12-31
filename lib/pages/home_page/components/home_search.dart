@@ -19,11 +19,10 @@ class _HomeSearchState extends State<HomeSearch> {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black87,
+            Icons.arrow_back
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         title: TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(
@@ -35,7 +34,6 @@ class _HomeSearchState extends State<HomeSearch> {
           IconButton(
             icon: const Icon(
               Icons.filter_list,
-              color: Colors.black87,
             ),
             onPressed: () {},
           ),

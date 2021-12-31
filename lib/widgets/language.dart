@@ -14,18 +14,19 @@ class LanguageScreen extends StatefulWidget {
 class _LanguageScreenState extends State<LanguageScreen> {
   @override
   Widget build(BuildContext context) {
-
+    final localProvider = context.watch<LocaleProvider>();
 
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         title: const Text("Language"),
       ),
 
       body: ListView.builder(
           itemCount: L10n.all.length,
           itemBuilder: (context, index){
-            final flag = L10n.getFlag(L10n.all[index].languageCode);
+
 
             return InkWell(
               onTap: (){
@@ -35,9 +36,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
               },
               child: ListTile(
                 leading: Text(
-                    L10n.getFlag(L10n.all[index].languageCode),
+                  L10n.all[index].languageCode,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
+                title: Text(
+                  L10n.getFlag(L10n.all[index].languageCode),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                ),
+
+                trailing: localProvider.locale.languageCode == L10n.all[index].languageCode ? const Icon(Icons.check, color: Colors.cyan,): const SizedBox(width: 0, height: 0,),
               ),
             );
 

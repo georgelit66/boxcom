@@ -12,7 +12,7 @@ List<Enterprise> enterprises = [
       gmail: "altechs@gmail.com",
       name: "ALTECHS ENGINEERING",
       website: "www.altechs.com",
-      telephone: "094509493040+34",
+      telephone: "094509493",
       ville: "Yaounde",
       description: "This is an enterprise",
       enterpriseSector:"Technology",

@@ -42,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -58,14 +57,14 @@ class _SplashScreenState extends State<SplashScreen> {
                       width: 100,
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blueGrey
+                          color: Colors.black26
                       ),
                       child: Center(
                         child: Text(
                           "B",
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
-                              fontSize: 60,
+                              fontSize: 65,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -80,8 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 left: 15,
                 right: 15,
                 child: Center(
-
-                    child:  Text("Boxcom", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 18),)
+                    child:  Text("Boxcom", style: TextStyle( fontWeight: FontWeight.bold, fontSize: 18),)
                 )
             )
 

@@ -24,7 +24,7 @@ class _BoutiqueSearchState extends State<BoutiqueSearch> {
             color: Colors.black87,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         title:  TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(

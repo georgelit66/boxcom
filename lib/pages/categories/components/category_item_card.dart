@@ -110,7 +110,6 @@ class _CategoryItemCardState extends State<CategoryItemCard> {
                 child:  Text(
                   "${widget.item.price} CFA",
                   style: const TextStyle(
-                    color: Colors.green,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

@@ -24,7 +24,7 @@ class _EnterpriseSearchState extends State<EnterpriseSearch> {
             color: Colors.black87,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         title:TextField(
           autofocus: true,
           decoration: InputDecoration.collapsed(

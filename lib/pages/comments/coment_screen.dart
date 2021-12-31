@@ -2,6 +2,7 @@ import 'package:boxcom/models/post_model.dart';
 import 'package:boxcom/pages/comments/components/comment.dart';
 import 'package:boxcom/pages/comments/components/comment_tile.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CommentScreen extends StatefulWidget {
@@ -18,21 +19,20 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Comments",
-            style: TextStyle(
-                color: Colors.black54
+          title: Text(
+            AppLocalizations.of(context)!.comments,
+            style: const TextStyle(
             ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          elevation: 10,
           leading: IconButton(
             onPressed: (){
               Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
             ),
           ),
         ),

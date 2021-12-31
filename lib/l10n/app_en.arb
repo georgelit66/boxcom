@@ -62,6 +62,54 @@
   "construction": "Construction",
   "transport": "Transport",
 
+  "articles": "articles",
+  "products": "products",
+  "publishArticle": "Publish Article",
+
+
+  "addToFavourite": "Add to Favourite",
+
+  "aboutApplication": "About the Application",
+
+  "partners": "Partners",
+  "members": "Members",
+  "subscribers": "Subscribers",
+
+
+
+
+  "productTitle": "Product tilte",
+  "productPrice": "Product price",
+  "productDescription": "Product Description",
+  "productCategory": "Product category",
+  "productSubCategory": "Sub Category",
+
+  "articleDescription" : "Article Description",
+
+  "newPost": "New Article",
+
+  "edit": "Edit",
+  "post": "Poster",
+
+  "boutiquePartners": "Boutique Partners",
+  "boutiqueMembers": "Boutique Members",
+  "enterprisePartners": "Enterprise Partners",
+  "enterpriseMembers": "Enterprise Members",
+
+  "youSubscribedTo": "You subscribed to ",
+  "youUnSubscribedFrom": "You Unsubscribed from",
+  "comments": "Comments",
+  "save": "Save",
+  "cancel": "Cancel",
+  "addedToFavouriteSuccess": "Added to favorites successfully!",
+  "dontHaveAnAccount": "Don't have an Account ?",
+
+  "alreadyHaveAccount": "Already have an Account ?",
+
+
+
+
+
 
 
 

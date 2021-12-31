@@ -64,7 +64,7 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                             )
                         ),
                         const SizedBox(width: 5.0,),
-                         EnterpriseSort()
+                         const EnterpriseSort()
 
 
                       ],
@@ -98,7 +98,7 @@ class _EnterpriseTabState extends State<EnterpriseTab> {
                                   gradient:  _selectedIndex == 0 ?
                                  LinearGradient(
                                       colors: [
-                                        Theme.of(context).indicatorColor,
+                                        Colors.cyanAccent,
                                         Theme.of(context).primaryColor
                                       ]
                                   ):const LinearGradient(

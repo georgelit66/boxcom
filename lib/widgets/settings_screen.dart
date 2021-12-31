@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'about_application.dart';
+
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -18,7 +20,9 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         title: Text(AppLocalizations.of(context)!.settings),
+        elevation: 10,
       ),
       body: Center(
         child:  Column(
@@ -50,6 +54,7 @@ class _SettingsState extends State<Settings> {
                 Provider.of<ThemeNotifier>(context).darkTheme ?  CupertinoIcons.brightness_solid : CupertinoIcons.brightness,
                 color: Colors.cyan,
               ),
+
               title:   Text(
                   AppLocalizations.of(context)!.darkTheme,
                 style: const TextStyle(
@@ -63,6 +68,27 @@ class _SettingsState extends State<Settings> {
                   },
                   value: notifier.darkTheme ,
                 ),
+              ),
+            ),
+
+            const SizedBox(height: 5.0,),
+
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const AboutApplication()));
+              },
+              child:  ListTile(
+                leading: const Icon(
+                  Icons.info,
+                  color: Colors.cyan,
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.aboutApplication,
+                  style: const TextStyle(
+                  ),
+                ),
+
+
               ),
             ),
 

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EnterpriseEdit extends StatefulWidget {
   const EnterpriseEdit({Key? key, required this.enterprise}) : super(key: key);
@@ -18,12 +19,11 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         centerTitle: true,
         title: Text(
           widget.enterprise.name,
           style: const TextStyle(
-              color: Colors.black54,
               fontSize: 20,
               fontWeight: FontWeight.w700
           ),
@@ -31,7 +31,6 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
         leading: IconButton(
           icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -48,15 +47,7 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
         ),
         child: ListView(
           children: [
-            const Text(
-              "Edit Profile",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700
-              ),
-            ),
 
-           const SizedBox(height: 15.0,),
 
 
            Center(
@@ -75,7 +66,7 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                            spreadRadius: 2,
                            blurRadius: 10,
                            color: Colors.black.withOpacity(0.1),
-                           offset: Offset(0,10)
+                           offset: const Offset(0,10)
                          )
                        ],
                        shape: BoxShape.circle,
@@ -121,7 +112,6 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                 labelText: "Enterprise name",
                 hintText: widget.enterprise.name,
                 helperStyle:  const TextStyle(
-                  color: Colors.black,
                   fontWeight: FontWeight.w600
                 ),
               ),
@@ -135,7 +125,6 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                 labelText: "location",
                 hintText: widget.enterprise.ville,
                 helperStyle:  const TextStyle(
-                    color: Colors.black,
                     fontWeight: FontWeight.w600
                 ),
               ),
@@ -150,7 +139,6 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                 labelText: "Enterprise website",
                 hintText: widget.enterprise.website,
                 helperStyle:  const TextStyle(
-                    color: Colors.black,
                     fontWeight: FontWeight.w600
                 ),
               ),
@@ -164,7 +152,6 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                 labelText: "Enterprise phone ",
                 hintText: widget.enterprise.telephone,
                 helperStyle:  const TextStyle(
-                    color: Colors.black,
                     fontWeight: FontWeight.w600
                 ),
               ),
@@ -179,7 +166,7 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                 labelText: "Enterprise description",
                 hintText: widget.enterprise.description,
                 helperStyle:  const TextStyle(
-                    color: Colors.black,
+
                     fontWeight: FontWeight.w600
                 ),
               ),
@@ -202,13 +189,12 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                      child: Container(
                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                        decoration: BoxDecoration(
-                           border: Border.all(color:Theme.of(context).indicatorColor),
+                           border: Border.all(color:Theme.of(context).indicatorColor, width: 2),
                            borderRadius: BorderRadius.circular(15.0)
                        ),
-                       child: const Text(
-                         "Cancel",
-                         style: TextStyle(
-                             color: Colors.black87,
+                       child:  Text(
+                         AppLocalizations.of(context)!.cancel,
+                         style: const TextStyle(
                              fontSize: 16,
                              fontWeight: FontWeight.w600
                          ),
@@ -227,9 +213,9 @@ class _EnterpriseEditState extends State<EnterpriseEdit> {
                            color: Theme.of(context).primaryColor,
                            borderRadius: BorderRadius.circular(15.0)
                        ),
-                       child: const Text(
-                         "Save",
-                         style: TextStyle(
+                       child:  Text(
+                         AppLocalizations.of(context)!.save,
+                         style: const TextStyle(
                              color: Colors.white,
                              fontSize: 16,
                              fontWeight: FontWeight.w600

@@ -1,3 +1,4 @@
+import 'package:boxcom/pages/authentication/login.dart';
 import 'package:boxcom/pages/home_page/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class IntroScreen extends StatelessWidget {
             done: const Text('Finish'),
             onDone: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const MainHomePage()));
+                  MaterialPageRoute(builder: (_) => const LoginForm()));
             },
             showSkipButton: true,
             showNextButton: true,
@@ -69,7 +70,7 @@ class IntroScreen extends StatelessWidget {
             skip: const Text("Skip"),
             onSkip: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const MainHomePage()));
+                  MaterialPageRoute(builder: (_) => const LoginForm()));
             },
 
           )
